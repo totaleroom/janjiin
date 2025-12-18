@@ -1,0 +1,255 @@
+2025-12-18T12:56:54.663023154Z ==> Cloning from https://github.com/totaleroom/janjiin
+2025-12-18T12:56:55.284366416Z ==> Checking out commit 18f6fb474971af1b62636bfd16c38bc3f6dd77c0 in branch main
+2025-12-18T12:56:56.83551444Z ==> Using Node.js version 22.16.0 (default)
+2025-12-18T12:56:56.872451123Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2025-12-18T12:57:00.410607991Z ==> Running build command 'npm install; npm run build'...
+2025-12-18T12:57:14.839103124Z     '  --muted-foreground: 215 18% 35%;\n' +
+2025-12-18T12:57:14.839105374Z     '  --accent: 210 12% 88%;\n' +
+2025-12-18T12:57:14.839107824Z     '  --accent-foreground: 215 22% 22%;\n' +
+2025-12-18T12:57:14.839110344Z     '  --destructive: 0 72% 42%;\n' +
+2025-12-18T12:57:14.839112784Z     '  --destructive-foreground: 0 20% 96%;\n' +
+2025-12-18T12:57:14.839115154Z     '  --input: 210 20% 70%;\n' +
+2025-12-18T12:57:14.839117465Z     '  --ring: 173 80% 35%;\n' +
+2025-12-18T12:57:14.839119814Z     '  --chart-1: 173 80% 35%;\n' +
+2025-12-18T12:57:14.839122145Z     '  --chart-2: 262 65% 45%;\n' +
+2025-12-18T12:57:14.839124425Z     '  --chart-3: 280 70% 40%;\n' +
+2025-12-18T12:57:14.839126755Z     '  --chart-4: 195 75% 38%;\n' +
+2025-12-18T12:57:14.839129085Z     '  --chart-5: 340 65% 42%;\n' +
+2025-12-18T12:57:14.839131485Z     '  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;\n' +
+2025-12-18T12:57:14.839133865Z     '  --font-serif: Georgia, serif;\n' +
+2025-12-18T12:57:14.839136245Z     '  --font-mono: Menlo, monospace;\n' +
+2025-12-18T12:57:14.839138646Z     '  --highlight: 262 65% 58%;\n' +
+2025-12-18T12:57:14.839145046Z     '  --highlight-foreground: 0 0% 100%;\n' +
+2025-12-18T12:57:14.839147616Z     '  --radius: .5rem;\n' +
+2025-12-18T12:57:14.839150116Z     '  --shadow-2xs: 0px 2px 0px 0px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T12:57:14.839152426Z     '  --shadow-xs: 0px 2px 0px 0px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T12:57:14.839154736Z     '  --shadow-sm: 0px 2px 0px 0px hsl(210 15% 70% / 0.00), 0px 1px 2px -1px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T12:57:14.839157156Z     '  --shadow: 0px 2px 0px 0px hsl(210 15% 70% / 0.00), 0px 1px 2px -1px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T12:57:14.839159607Z     '  --shadow-md: 0px 2px 0px 0px hsl(210 15% 70% / 0.00), 0px 2px 4px -1px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T12:57:14.839161947Z     '  --shadow-lg: 0px 2px 0px 0px hsl(210 15% 70% / 0.00), 0px 4px 6px -1px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T12:57:14.839164457Z     '  --shadow-xl: 0px 2px 0px 0px hsl(210 15% 70% / 0.00), 0px 8px 10px -1px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T12:57:14.839166927Z     '  --shadow-2xl: 0px 2px 0px 0px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T12:57:14.839169217Z     '  --tracking-normal: 0em;\n' +
+2025-12-18T12:57:14.839171577Z     '  --spacing: 0.25rem;\n' +
+2025-12-18T12:57:14.839173857Z     '\n' +
+2025-12-18T12:57:14.839176237Z     '/* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.839186448Z     '  --sidebar-primary-border: hsl(var(--sidebar-primary));\n' +
+2025-12-18T12:57:14.839190388Z     '  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.839192718Z     '\n' +
+2025-12-18T12:57:14.839195028Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.839197558Z     '  --sidebar-accent-border: hsl(var(--sidebar-accent));\n' +
+2025-12-18T12:57:14.839199888Z     '  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.839202289Z     '\n' +
+2025-12-18T12:57:14.839204609Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.839206919Z     '  --primary-border: hsl(var(--primary));\n' +
+2025-12-18T12:57:14.839210209Z     '  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.839212689Z     '\n' +
+2025-12-18T12:57:14.839215259Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.839217549Z     '  --secondary-border: hsl(var(--secondary));\n' +
+2025-12-18T12:57:14.839220009Z     '  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.839222379Z     '\n' +
+2025-12-18T12:57:14.839224679Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.83922699Z     '  --muted-border: hsl(var(--muted));\n' +
+2025-12-18T12:57:14.83922934Z     '  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.83923165Z     '\n' +
+2025-12-18T12:57:14.839234Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.83923633Z     '  --accent-border: hsl(var(--accent));\n' +
+2025-12-18T12:57:14.83923869Z     '  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.83924104Z     '\n' +
+2025-12-18T12:57:14.83924328Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.839245591Z     '  --destructive-border: hsl(var(--destructive));\n' +
+2025-12-18T12:57:14.839247901Z     '  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.839254401Z     '}\n' +
+2025-12-18T12:57:14.839256951Z     '\n' +
+2025-12-18T12:57:14.839259281Z     '.dark {\n' +
+2025-12-18T12:57:14.839261681Z     '  --button-outline: rgba(255,255,255, .10);\n' +
+2025-12-18T12:57:14.839263951Z     '  --badge-outline: rgba(255,255,255, .05);\n' +
+2025-12-18T12:57:14.839267581Z     '  --opaque-button-border-intensity: 9;\n' +
+2025-12-18T12:57:14.839270042Z     '  --elevate-1: rgba(255,255,255, .04);\n' +
+2025-12-18T12:57:14.839272382Z     '  --elevate-2: rgba(255,255,255, .09);\n' +
+2025-12-18T12:57:14.839274622Z     '  --background: 215 18% 8%;\n' +
+2025-12-18T12:57:14.839277042Z     '  --foreground: 210 15% 92%;\n' +
+2025-12-18T12:57:14.839279242Z     '  --border: 215 14% 18%;\n' +
+2025-12-18T12:57:14.839281662Z     '  --card: 215 16% 10%;\n' +
+2025-12-18T12:57:14.839284092Z     '  --card-foreground: 210 15% 92%;\n' +
+2025-12-18T12:57:14.839286433Z     '  --card-border: 215 14% 14%;\n' +
+2025-12-18T12:57:14.839288682Z     '  --sidebar: 215 16% 12%;\n' +
+2025-12-18T12:57:14.839290983Z     '  --sidebar-foreground: 210 15% 90%;\n' +
+2025-12-18T12:57:14.839293273Z     '  --sidebar-border: 215 14% 16%;\n' +
+2025-12-18T12:57:14.839295543Z     '  --sidebar-primary: 173 80% 35%;\n' +
+2025-12-18T12:57:14.839297923Z     '  --sidebar-primary-foreground: 0 0% 100%;\n' +
+2025-12-18T12:57:14.839300223Z     '  --sidebar-accent: 215 14% 18%;\n' +
+2025-12-18T12:57:14.839302583Z     '  --sidebar-accent-foreground: 210 15% 88%;\n' +
+2025-12-18T12:57:14.839304813Z     '  --sidebar-ring: 173 80% 35%;\n' +
+2025-12-18T12:57:14.839307113Z     '  --popover: 215 16% 16%;\n' +
+2025-12-18T12:57:14.839309534Z     '  --popover-foreground: 210 14% 88%;\n' +
+2025-12-18T12:57:14.839311934Z     '  --popover-border: 215 14% 20%;\n' +
+2025-12-18T12:57:14.839314234Z     '  --primary: 173 80% 35%;\n' +
+2025-12-18T12:57:14.839316614Z     '  --primary-foreground: 173 20% 95%;\n' +
+2025-12-18T12:57:14.839318824Z     '  --secondary: 215 12% 22%;\n' +
+2025-12-18T12:57:14.839321074Z     '  --secondary-foreground: 210 14% 86%;\n' +
+2025-12-18T12:57:14.839323384Z     '  --muted: 215 10% 20%;\n' +
+2025-12-18T12:57:14.839325684Z     '  --muted-foreground: 210 12% 68%;\n' +
+2025-12-18T12:57:14.839328044Z     '  --accent: 215 12% 18%;\n' +
+2025-12-18T12:57:14.839330404Z     '  --accent-foreground: 210 14% 85%;\n' +
+2025-12-18T12:57:14.839332704Z     '  --destructive: 0 72% 42%;\n' +
+2025-12-18T12:57:14.839334975Z     '  --destructive-foreground: 0 20% 96%;\n' +
+2025-12-18T12:57:14.839337285Z     '  --input: 215 18% 35%;\n' +
+2025-12-18T12:57:14.839339595Z     '  --ring: 173 80% 35%;\n' +
+2025-12-18T12:57:14.839341845Z     '  --chart-1: 173 75% 60%;\n' +
+2025-12-18T12:57:14.839344185Z     '  --chart-2: 262 60% 68%;\n' +
+2025-12-18T12:57:14.839346585Z     '  --chart-3: 280 65% 65%;\n' +
+2025-12-18T12:57:14.839348835Z     '  --chart-4: 195 70% 62%;\n' +
+2025-12-18T12:57:14.839351116Z     '  --chart-5: 340 60% 65%;\n' +
+2025-12-18T12:57:14.839353545Z     '  --shadow-2xs: 0px 2px 0px 0px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T12:57:14.839356156Z     '  --shadow-xs: 0px 2px 0px 0px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T12:57:14.839358496Z     '  --shadow-sm: 0px 2px 0px 0px hsl(215 15% 5% / 0.00), 0px 1px 2px -1px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T12:57:14.839360986Z     '  --shadow: 0px 2px 0px 0px hsl(215 15% 5% / 0.00), 0px 1px 2px -1px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T12:57:14.839363456Z     '  --shadow-md: 0px 2px 0px 0px hsl(215 15% 5% / 0.00), 0px 2px 4px -1px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T12:57:14.839369286Z     '  --shadow-lg: 0px 2px 0px 0px hsl(215 15% 5% / 0.00), 0px 4px 6px -1px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T12:57:14.839371797Z     '  --shadow-xl: 0px 2px 0px 0px hsl(215 15% 5% / 0.00), 0px 8px 10px -1px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T12:57:14.839374146Z     '  --shadow-2xl: 0px 2px 0px 0px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T12:57:14.839376587Z     '  --highlight: 262 60% 68%;\n' +
+2025-12-18T12:57:14.839386647Z     '  --highlight-foreground: 0 0% 100%;\n' +
+2025-12-18T12:57:14.839389887Z     '\n' +
+2025-12-18T12:57:14.839392277Z     '/* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.839394838Z     '  --sidebar-primary-border: hsl(var(--sidebar-primary));\n' +
+2025-12-18T12:57:14.839397258Z     '  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.839399758Z     '\n' +
+2025-12-18T12:57:14.839401998Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.839404338Z     '  --sidebar-accent-border: hsl(var(--sidebar-accent));\n' +
+2025-12-18T12:57:14.839406678Z     '  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.839409088Z     '\n' +
+2025-12-18T12:57:14.839411378Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.839413738Z     '  --primary-border: hsl(var(--primary));\n' +
+2025-12-18T12:57:14.839416119Z     '  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.839418509Z     '\n' +
+2025-12-18T12:57:14.839420709Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.839423029Z     '  --secondary-border: hsl(var(--secondary));\n' +
+2025-12-18T12:57:14.839425399Z     '  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.839427659Z     '\n' +
+2025-12-18T12:57:14.839430019Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.839432419Z     '  --muted-border: hsl(var(--muted));\n' +
+2025-12-18T12:57:14.839434789Z     '  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.83943716Z     '\n' +
+2025-12-18T12:57:14.839439469Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.83944197Z     '  --accent-border: hsl(var(--accent));\n' +
+2025-12-18T12:57:14.8394443Z     '  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.83944668Z     '\n' +
+2025-12-18T12:57:14.83944908Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T12:57:14.83945146Z     '  --destructive-border: hsl(var(--destructive));\n' +
+2025-12-18T12:57:14.83945399Z     '  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T12:57:14.83945628Z     '}\n' +
+2025-12-18T12:57:14.83945869Z     '\n' +
+2025-12-18T12:57:14.839461031Z     '@layer base {\n' +
+2025-12-18T12:57:14.839463291Z     '  * {\n' +
+2025-12-18T12:57:14.839465651Z     '    @apply border-border;\n' +
+2025-12-18T12:57:14.839468031Z     '  }\n' +
+2025-12-18T12:57:14.839470461Z     '\n' +
+2025-12-18T12:57:14.839472781Z     '  body {\n' +
+2025-12-18T12:57:14.839475161Z     '    @apply font-sans antialiased bg-background text-foreground;\n' +
+2025-12-18T12:57:14.839477451Z     '  }\n' +
+2025-12-18T12:57:14.839479691Z     '}\n' +
+2025-12-18T12:57:14.839482122Z     '\n' +
+2025-12-18T12:57:14.839488262Z     '/**\n' +
+2025-12-18T12:57:14.839490832Z     ' * Using the elevate system.\n' +
+2025-12-18T12:57:14.839493262Z     ' * Automatic contrast adjustment.\n' +
+2025-12-18T12:57:14.839495562Z     ' *\n' +
+2025-12-18T12:57:14.839498012Z     ' * <element className="hover-elevate" />\n' +
+2025-12-18T12:57:14.839500363Z     ' * <element className="active-elevate-2" />\n' +
+2025-12-18T12:57:14.839502692Z     ' *\n' +
+2025-12-18T12:57:14.839505123Z     ' * // Using the tailwind utility when a data attribute is "on"\n' +
+2025-12-18T12:57:14.839507593Z     ' * <element className="toggle-elevate data-[state=on]:toggle-elevated" />\n' +
+2025-12-18T12:57:14.839509953Z     ' * // Or manually controlling the toggle state\n' +
+2025-12-18T12:57:14.839512273Z     ' * <element className="toggle-elevate toggle-elevated" />\n' +
+2025-12-18T12:57:14.839514553Z     ' *\n' +
+2025-12-18T12:57:14.839516793Z     ' * Elevation systems have to handle many states.\n' +
+2025-12-18T12:57:14.839519233Z     ' * - not-hovered, vs. hovered vs. active  (three mutually exclusive states)\n' +
+2025-12-18T12:57:14.839521613Z     ' * - toggled or not\n' +
+2025-12-18T12:57:14.839523893Z     ' * - focused or not (this is not handled with these utilities)\n' +
+2025-12-18T12:57:14.839526154Z     ' *\n' +
+2025-12-18T12:57:14.839528394Z     ' * Even without handling focused or not, this is six possible combinations that\n' +
+2025-12-18T12:57:14.839530824Z     ' * need to be distinguished from eachother visually.\n' +
+2025-12-18T12:57:14.839533124Z     ' */\n' +
+2025-12-18T12:57:14.839535384Z     '@layer utilities {\n' +
+2025-12-18T12:57:14.839537734Z     '\n' +
+2025-12-18T12:57:14.839540044Z     '  /* Hide ugly search cancel button in Chrome until we can style it properly */\n' +
+2025-12-18T12:57:14.839542325Z     '  input[type="search"]::-webkit-search-cancel-button {\n' +
+2025-12-18T12:57:14.839544694Z     '    @apply hidden;\n' +
+2025-12-18T12:57:14.839546965Z     '  }\n' +
+2025-12-18T12:57:14.839549305Z     '\n' +
+2025-12-18T12:57:14.839551665Z     '  /* Placeholder styling for contentEditable div */\n' +
+2025-12-18T12:57:14.839554065Z     '  [contenteditable][data-placeholder]:empty::before {\n' +
+2025-12-18T12:57:14.839556445Z     '    content: attr(data-placeholder);\n' +
+2025-12-18T12:57:14.839579466Z     '    color: hsl(var(--muted-foreground));\n' +
+2025-12-18T12:57:14.839586207Z     '    pointer-events: none;\n' +
+2025-12-18T12:57:14.839588807Z     '  }\n' +
+2025-12-18T12:57:14.839591117Z     '\n' +
+2025-12-18T12:57:14.839593477Z     '  /* .no-default-hover-elevate/no-default-active-elevate is an escape hatch so consumers of\n' +
+2025-12-18T12:57:14.839595827Z     '   * buttons/badges can remove the automatic brightness adjustment on interactions\n' +
+2025-12-18T12:57:14.839598207Z     '   * and program their own. */\n' +
+2025-12-18T12:57:14.839600607Z     '  .no-default-hover-elevate {}\n' +
+2025-12-18T12:57:14.839602917Z     '\n' +
+2025-12-18T12:57:14.839605217Z     '  .no-default-active-elevate {}\n' +
+2025-12-18T12:57:14.839607488Z     '\n' +
+2025-12-18T12:57:14.839609837Z     '\n' +
+2025-12-18T12:57:14.839612218Z     '  /**\n' +
+2025-12-18T12:57:14.839614618Z     '   * Toggleable backgrounds go behind the content. Hoverable/active goes on top.\n' +
+2025-12-18T12:57:14.839617158Z     "   * This way they can stack/compound. Both will overlap the parent's borders!\n" +
+2025-12-18T12:57:14.839629109Z     '   * So borders will be automatically adjusted both on toggle, and hover/active,\n' +
+2025-12-18T12:57:14.839631859Z     '   * and they will be compounded.\n' +
+2025-12-18T12:57:14.839634399Z     '   */\n' +
+2025-12-18T12:57:14.839641779Z     '  .toggle-elevate::before,\n' +
+2025-12-18T12:57:14.839644279Z     '  .toggle-elevate-2::before {\n' +
+2025-12-18T12:57:14.839646549Z     '    content: "";\n' +
+2025-12-18T12:57:14.839648879Z     '    pointer-events: none;\n' +
+2025-12-18T12:57:14.83965117Z     '    position: absolute;\n' +
+2025-12-18T12:57:14.83965352Z     '    inset: 0px;\n' +
+2025-12-18T12:57:14.83965601Z     '    /*border-radius: inherit;   match rounded corners */\n' +
+2025-12-18T12:57:14.83965838Z     '    border-radius: inherit;\n' +
+2025-12-18T12:57:14.83966074Z     '    z-index: -1;\n' +
+2025-12-18T12:57:14.83966315Z     '    /* sits behind content but above backdrop */\n' +
+2025-12-18T12:57:14.83966544Z     '  }\n' +
+2025-12-18T12:57:14.83966774Z     '\n' +
+2025-12-18T12:57:14.83967Z     '  .toggle-elevate.toggle-elevated::before {\n' +
+2025-12-18T12:57:14.839672451Z     '    background-color: var(--elevate-2);\n' +
+2025-12-18T12:57:14.839674661Z     '  }\n' +
+2025-12-18T12:57:14.839676861Z     '\n' +
+2025-12-18T12:57:14.839679331Z     "  /* If there's a 1px border, adjust the inset so that it covers that parent's border */\n" +
+2025-12-18T12:57:14.839681641Z     '  .border.toggle-elevate::before {\n' +
+2025-12-18T12:57:14.839684001Z     '    inset: -1px;\n' +
+2025-12-18T12:57:14.839686281Z     '  }\n' +
+2025-12-18T12:57:14.839688601Z     '\n' +
+2025-12-18T12:57:14.839691111Z     '  /* Does not work on elements with overflow:hidden! */\n' +
+2025-12-18T12:57:14.839693412Z     '  .hover-elevate:not(.no-default-hover-elevate),\n' +
+2025-12-18T12:57:14.839695742Z     '  .active-elevate:not(.no-default-active-elevate),\n' +
+2025-12-18T12:57:14.839698012Z     '  .hover-elevate-2:not(.no-default-hover-elevate),\n' +
+2025-12-18T12:57:14.839700372Z     '  .active-elevate-2:not(.no-default-active-elevate) {\n' +
+2025-12-18T12:57:14.839702742Z     '    position: relative;\n' +
+2025-12-18T12:57:14.839705062Z     '    z-index: 0;\n' +
+2025-12-18T12:57:14.839707432Z     '  }\n' +
+2025-12-18T12:57:14.839709662Z     '\n' +
+2025-12-18T12:57:14.839711952Z     '  .hover-elevate:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T12:57:14.839714253Z     '  .active-elevate:not(.no-default-active-elevate)::after,\n' +
+2025-12-18T12:57:14.839716683Z     '  .hover-elevate-2:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T12:57:14.839718973Z     '  .active-elevate-2:not(.no-default-active-elevate)::after {\n' +
+2025-12-18T12:57:14.839721343Z     '    content: "";\n' +
+2025-12-18T12:57:14.839723633Z     '    pointer-events: none;\n' +
+2025-12-18T12:57:14.839725993Z     '    position: absolute;\n' +
+2025-12-18T12:57:14.839728333Z     '    inset: 0px;\n' +
+2025-12-18T12:57:14.839730653Z     '    /*border-radius: inherit;   match'... 912 more characters,
+2025-12-18T12:57:14.839733093Z   plugin: 'vite:css',
+2025-12-18T12:57:14.839735443Z   hook: 'transform',
+2025-12-18T12:57:14.839737763Z   id: '/opt/render/project/src/client/src/index.css',
+2025-12-18T12:57:14.839740084Z   watchFiles: [
+2025-12-18T12:57:14.839742384Z     '/opt/render/project/src/client/index.html',
+2025-12-18T12:57:14.839744774Z     '/opt/render/project/src/client/src/main.tsx',
+2025-12-18T12:57:14.839747254Z     '/opt/render/project/src/package.json',
+2025-12-18T12:57:14.839749634Z     '/opt/render/project/src/node_modules/react/jsx-runtime.js',
+2025-12-18T12:57:14.839752054Z     '/opt/render/project/src/node_modules/react-dom/client.js',
+2025-12-18T12:57:14.839754494Z     '/opt/render/project/src/client/src/App.tsx',
+2025-12-18T12:57:14.839756775Z     '/opt/render/project/src/client/src/index.css'
+2025-12-18T12:57:14.839762755Z   ]
+2025-12-18T12:57:14.839765235Z }
+2025-12-18T12:57:14.937474879Z ==> Build failed 😞
+2025-12-18T12:57:14.93749215Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
