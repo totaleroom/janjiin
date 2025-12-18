@@ -1,0 +1,50 @@
+2025-12-18T13:03:04.824286121Z     '\n' +
+2025-12-18T13:03:04.824287901Z     '  /* Does not work on elements with overflow:hidden! */\n' +
+2025-12-18T13:03:04.824289621Z     '  .hover-elevate:not(.no-default-hover-elevate),\n' +
+2025-12-18T13:03:04.824291281Z     '  .active-elevate:not(.no-default-active-elevate),\n' +
+2025-12-18T13:03:04.824292981Z     '  .hover-elevate-2:not(.no-default-hover-elevate),\n' +
+2025-12-18T13:03:04.824294651Z     '  .active-elevate-2:not(.no-default-active-elevate) {\n' +
+2025-12-18T13:03:04.824296411Z     '    position: relative;\n' +
+2025-12-18T13:03:04.824298081Z     '    z-index: 0;\n' +
+2025-12-18T13:03:04.824299731Z     '  }\n' +
+2025-12-18T13:03:04.824301381Z     '\n' +
+2025-12-18T13:03:04.824303021Z     '  .hover-elevate:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:03:04.824304671Z     '  .active-elevate:not(.no-default-active-elevate)::after,\n' +
+2025-12-18T13:03:04.824306311Z     '  .hover-elevate-2:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:03:04.824307971Z     '  .active-elevate-2:not(.no-default-active-elevate)::after {\n' +
+2025-12-18T13:03:04.824309641Z     '    content: "";\n' +
+2025-12-18T13:03:04.824311271Z     '    pointer-events: none;\n' +
+2025-12-18T13:03:04.824312921Z     '    position: absolute;\n' +
+2025-12-18T13:03:04.824314581Z     '    inset: 0px;\n' +
+2025-12-18T13:03:04.824316251Z     '    /*border-radius: inherit;   match'... 912 more characters,
+2025-12-18T13:03:04.824319401Z   plugin: 'vite:css',
+2025-12-18T13:03:04.824321121Z   hook: 'transform',
+2025-12-18T13:03:04.824322781Z   id: '/opt/render/project/src/client/src/index.css',
+2025-12-18T13:03:04.824324511Z   watchFiles: [
+2025-12-18T13:03:04.824326171Z     '/opt/render/project/src/client/index.html',
+2025-12-18T13:03:04.824327811Z     '/opt/render/project/src/client/src/main.tsx',
+2025-12-18T13:03:04.824329442Z     '/opt/render/project/src/package.json',
+2025-12-18T13:03:04.824331122Z     '/opt/render/project/src/node_modules/react/jsx-runtime.js',
+2025-12-18T13:03:04.824332762Z     '/opt/render/project/src/node_modules/react-dom/client.js',
+2025-12-18T13:03:04.824334412Z     '/opt/render/project/src/client/src/App.tsx',
+2025-12-18T13:03:04.824336082Z     '/opt/render/project/src/client/src/index.css',
+2025-12-18T13:03:04.824337912Z     '/opt/render/project/src/node_modules/react/cjs/react-jsx-runtime.production.min.js',
+2025-12-18T13:03:04.824342332Z     '/opt/render/project/src/node_modules/react-dom/index.js',
+2025-12-18T13:03:04.824344112Z     '/opt/render/project/src/node_modules/wouter/esm/index.js',
+2025-12-18T13:03:04.824345842Z     '/opt/render/project/src/node_modules/@tanstack/react-query/build/modern/index.js',
+2025-12-18T13:03:04.824347532Z     '/opt/render/project/src/client/src/lib/queryClient.ts',
+2025-12-18T13:03:04.824349212Z     '/opt/render/project/src/client/src/components/ui/toaster.tsx',
+2025-12-18T13:03:04.824350892Z     '/opt/render/project/src/client/src/components/ui/tooltip.tsx',
+2025-12-18T13:03:04.824352552Z     '/opt/render/project/src/client/src/components/theme-provider.tsx',
+2025-12-18T13:03:04.824354242Z     '/opt/render/project/src/client/src/context/AuthContext.tsx',
+2025-12-18T13:03:04.824356672Z     '/opt/render/project/src/client/src/pages/not-found.tsx',
+2025-12-18T13:03:04.824358442Z     '/opt/render/project/src/client/src/pages/landing.tsx',
+2025-12-18T13:03:04.824360112Z     '/opt/render/project/src/client/src/pages/login.tsx',
+2025-12-18T13:03:04.824361783Z     '/opt/render/project/src/client/src/pages/register.tsx',
+2025-12-18T13:03:04.824363432Z     '/opt/render/project/src/client/src/pages/onboarding.tsx',
+2025-12-18T13:03:04.824365112Z     '/opt/render/project/src/client/src/pages/dashboard.tsx',
+2025-12-18T13:03:04.824366783Z     '/opt/render/project/src/client/src/pages/booking.tsx'
+2025-12-18T13:03:04.824368513Z   ]
+2025-12-18T13:03:04.824370323Z }
+2025-12-18T13:03:04.917843014Z ==> Build failed 😞
+2025-12-18T13:03:04.917861734Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
