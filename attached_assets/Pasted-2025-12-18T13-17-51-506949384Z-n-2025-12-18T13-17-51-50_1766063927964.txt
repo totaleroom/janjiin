@@ -1,0 +1,100 @@
+2025-12-18T13:17:51.506949384Z     '\n' +
+2025-12-18T13:17:51.506951664Z     '  /* Placeholder styling for contentEditable div */\n' +
+2025-12-18T13:17:51.506953944Z     '  [contenteditable][data-placeholder]:empty::before {\n' +
+2025-12-18T13:17:51.506956214Z     '    content: attr(data-placeholder);\n' +
+2025-12-18T13:17:51.506958354Z     '    color: hsl(var(--muted-foreground));\n' +
+2025-12-18T13:17:51.506960474Z     '    pointer-events: none;\n' +
+2025-12-18T13:17:51.506962624Z     '  }\n' +
+2025-12-18T13:17:51.506964774Z     '\n' +
+2025-12-18T13:17:51.506967034Z     '  /* .no-default-hover-elevate/no-default-active-elevate is an escape hatch so consumers of\n' +
+2025-12-18T13:17:51.506969294Z     '   * buttons/badges can remove the automatic brightness adjustment on interactions\n' +
+2025-12-18T13:17:51.506971404Z     '   * and program their own. */\n' +
+2025-12-18T13:17:51.506973584Z     '  .no-default-hover-elevate {}\n' +
+2025-12-18T13:17:51.506975704Z     '\n' +
+2025-12-18T13:17:51.506977854Z     '  .no-default-active-elevate {}\n' +
+2025-12-18T13:17:51.506980004Z     '\n' +
+2025-12-18T13:17:51.506982144Z     '\n' +
+2025-12-18T13:17:51.506984334Z     '  /**\n' +
+2025-12-18T13:17:51.506986444Z     '   * Toggleable backgrounds go behind the content. Hoverable/active goes on top.\n' +
+2025-12-18T13:17:51.506988804Z     "   * This way they can stack/compound. Both will overlap the parent's borders!\n" +
+2025-12-18T13:17:51.506990924Z     '   * So borders will be automatically adjusted both on toggle, and hover/active,\n' +
+2025-12-18T13:17:51.506993225Z     '   * and they will be compounded.\n' +
+2025-12-18T13:17:51.506995325Z     '   */\n' +
+2025-12-18T13:17:51.506997494Z     '  .toggle-elevate::before,\n' +
+2025-12-18T13:17:51.507003635Z     '  .toggle-elevate-2::before {\n' +
+2025-12-18T13:17:51.507005915Z     '    content: "";\n' +
+2025-12-18T13:17:51.507008155Z     '    pointer-events: none;\n' +
+2025-12-18T13:17:51.507010365Z     '    position: absolute;\n' +
+2025-12-18T13:17:51.507012535Z     '    inset: 0px;\n' +
+2025-12-18T13:17:51.507014845Z     '    /*border-radius: inherit;   match rounded corners */\n' +
+2025-12-18T13:17:51.507017095Z     '    border-radius: inherit;\n' +
+2025-12-18T13:17:51.507019305Z     '    z-index: -1;\n' +
+2025-12-18T13:17:51.507021415Z     '    /* sits behind content but above backdrop */\n' +
+2025-12-18T13:17:51.507023555Z     '  }\n' +
+2025-12-18T13:17:51.507025775Z     '\n' +
+2025-12-18T13:17:51.507027915Z     '  .toggle-elevate.toggle-elevated::before {\n' +
+2025-12-18T13:17:51.507030065Z     '    background-color: var(--elevate-2);\n' +
+2025-12-18T13:17:51.507059026Z     '  }\n' +
+2025-12-18T13:17:51.507066266Z     '\n' +
+2025-12-18T13:17:51.507068676Z     "  /* If there's a 1px border, adjust the inset so that it covers that parent's border */\n" +
+2025-12-18T13:17:51.507071146Z     '  .border.toggle-elevate::before {\n' +
+2025-12-18T13:17:51.507073696Z     '    inset: -1px;\n' +
+2025-12-18T13:17:51.507076276Z     '  }\n' +
+2025-12-18T13:17:51.507079006Z     '\n' +
+2025-12-18T13:17:51.507081326Z     '  /* Does not work on elements with overflow:hidden! */\n' +
+2025-12-18T13:17:51.507083526Z     '  .hover-elevate:not(.no-default-hover-elevate),\n' +
+2025-12-18T13:17:51.507085886Z     '  .active-elevate:not(.no-default-active-elevate),\n' +
+2025-12-18T13:17:51.507088316Z     '  .hover-elevate-2:not(.no-default-hover-elevate),\n' +
+2025-12-18T13:17:51.507090666Z     '  .active-elevate-2:not(.no-default-active-elevate) {\n' +
+2025-12-18T13:17:51.507092966Z     '    position: relative;\n' +
+2025-12-18T13:17:51.507095166Z     '    z-index: 0;\n' +
+2025-12-18T13:17:51.507097436Z     '  }\n' +
+2025-12-18T13:17:51.507099676Z     '\n' +
+2025-12-18T13:17:51.507102076Z     '  .hover-elevate:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:17:51.507104296Z     '  .active-elevate:not(.no-default-active-elevate)::after,\n' +
+2025-12-18T13:17:51.507106526Z     '  .hover-elevate-2:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:17:51.507108747Z     '  .active-elevate-2:not(.no-default-active-elevate)::after {\n' +
+2025-12-18T13:17:51.507110967Z     '    content: "";\n' +
+2025-12-18T13:17:51.507113447Z     '    pointer-events: none;\n' +
+2025-12-18T13:17:51.507115756Z     '    position: absolute;\n' +
+2025-12-18T13:17:51.507118056Z     '    inset: 0px;\n' +
+2025-12-18T13:17:51.507120317Z     '    /*border-radius: inherit;   match rounded corners */\n' +
+2025-12-18T13:17:51.507122517Z     '    border-radius: inherit;\n' +
+2025-12-18T13:17:51.507124707Z     '    z-index: 999;\n' +
+2025-12-18T13:17:51.507127047Z     '    /* sits in front of content */\n' +
+2025-12-18T13:17:51.507129267Z     '  }\n' +
+2025-12-18T13:17:51.507131467Z     '\n' +
+2025-12-18T13:17:51.507133657Z     '  .hover-elevate:hover:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:17:51.507135887Z     '  .active-elevate:active:not(.no-default-active-elevate)::after {\n' +
+2025-12-18T13:17:51.507138127Z     '    background-color: var(--elevate-1);\n' +
+2025-12-18T13:17:51.507140337Z     '  }\n' +
+2025-12-18T13:17:51.507142497Z     '\n' +
+2025-12-18T13:17:51.507144717Z     '  .hover-elevate-2:hover:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:17:51.507146967Z     '  .active-elevate-2:active:not(.no-default-active-elevate)::after {\n' +
+2025-12-18T13:17:51.507152817Z     '    background-color: var(--elevate-2);\n' +
+2025-12-18T13:17:51.507156257Z     '  }\n' +
+2025-12-18T13:17:51.507158447Z     '\n' +
+2025-12-18T13:17:51.507160597Z     "  /* If there's a 1px border, adjust the inset so that it covers that parent's border */\n" +
+2025-12-18T13:17:51.507162807Z     '  .border.hover-elevate:not(.no-hover-interaction-elevate)::after,\n' +
+2025-12-18T13:17:51.507165017Z     '  .border.active-elevate:not(.no-active-interaction-elevate)::after,\n' +
+2025-12-18T13:17:51.507176008Z     '  .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,\n' +
+2025-12-18T13:17:51.507178578Z     '  .border.active-elevate-2:not(.no-active-interaction-elevate)::after,\n' +
+2025-12-18T13:17:51.507180848Z     '  .border.hover-elevate:not(.no-hover-interaction-elevate)::after {\n' +
+2025-12-18T13:17:51.507183088Z     '    inset: -1px;\n' +
+2025-12-18T13:17:51.507185388Z     '  }\n' +
+2025-12-18T13:17:51.507187608Z     '}\n',
+2025-12-18T13:17:51.507190078Z   plugin: 'vite:css',
+2025-12-18T13:17:51.507192338Z   hook: 'transform',
+2025-12-18T13:17:51.507194638Z   id: '/opt/render/project/src/client/src/index.css',
+2025-12-18T13:17:51.507196898Z   watchFiles: [
+2025-12-18T13:17:51.507199238Z     '/opt/render/project/src/client/index.html',
+2025-12-18T13:17:51.507201468Z     '/opt/render/project/src/client/src/main.tsx',
+2025-12-18T13:17:51.507203758Z     '/opt/render/project/src/package.json',
+2025-12-18T13:17:51.507206018Z     '/opt/render/project/src/node_modules/react/jsx-runtime.js',
+2025-12-18T13:17:51.507208308Z     '/opt/render/project/src/client/src/App.tsx',
+2025-12-18T13:17:51.507210508Z     '/opt/render/project/src/node_modules/react-dom/client.js',
+2025-12-18T13:17:51.507214808Z     '/opt/render/project/src/client/src/index.css'
+2025-12-18T13:17:51.507217058Z   ]
+2025-12-18T13:17:51.507219408Z }
+2025-12-18T13:17:51.605121291Z ==> Build failed 😞
+2025-12-18T13:17:51.605135802Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
