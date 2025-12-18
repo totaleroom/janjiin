@@ -1,0 +1,50 @@
+2025-12-18T13:23:24.748130337Z To address issues that do not require attention, run:
+2025-12-18T13:23:24.748133947Z   npm audit fix
+2025-12-18T13:23:24.748137287Z 
+2025-12-18T13:23:24.748140868Z To address all issues (including breaking changes), run:
+2025-12-18T13:23:24.748145018Z   npm audit fix --force
+2025-12-18T13:23:24.748148398Z 
+2025-12-18T13:23:24.748152538Z Run `npm audit` for details.
+2025-12-18T13:23:24.92668662Z 
+2025-12-18T13:23:24.926702811Z > rest-express@1.0.0 build
+2025-12-18T13:23:24.926706501Z > tsx script/build.ts
+2025-12-18T13:23:24.926709271Z 
+2025-12-18T13:23:25.782526599Z building client...
+2025-12-18T13:23:25.83097869Z vite v5.4.20 building for production...
+2025-12-18T13:23:26.003496994Z transforming...
+2025-12-18T13:23:29.450271943Z ✓ 2667 modules transformed.
+2025-12-18T13:23:29.881591886Z rendering chunks...
+2025-12-18T13:23:29.893032241Z computing gzip size...
+2025-12-18T13:23:29.909206995Z ../dist/public/index.html                   1.29 kB │ gzip:   0.65 kB
+2025-12-18T13:23:29.909224845Z ../dist/public/assets/index-Wy-e4gUY.css    6.16 kB │ gzip:   1.36 kB
+2025-12-18T13:23:29.909268917Z ../dist/public/assets/index-1w6u6rL3.js   605.76 kB │ gzip: 180.63 kB
+2025-12-18T13:23:29.90942059Z 
+2025-12-18T13:23:29.90942952Z (!) Some chunks are larger than 500 kB after minification. Consider:
+2025-12-18T13:23:29.9094348Z - Using dynamic import() to code-split the application
+2025-12-18T13:23:29.909441181Z - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2025-12-18T13:23:29.909444841Z - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2025-12-18T13:23:29.909594974Z ✓ built in 3.94s
+2025-12-18T13:23:29.909744017Z building server...
+2025-12-18T13:23:30.194877947Z 
+2025-12-18T13:23:30.2015032Z   dist/index.cjs  1.2mb ⚠️
+2025-12-18T13:23:30.20151197Z 
+2025-12-18T13:23:30.201516591Z ⚡ Done in 273ms
+2025-12-18T13:23:35.211045581Z ==> Uploading build...
+2025-12-18T13:23:46.09390668Z ==> Uploaded in 7.0s. Compression took 3.9s
+2025-12-18T13:23:46.129133806Z ==> Build successful 🎉
+2025-12-18T13:24:23.179560414Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+2025-12-18T13:24:23.247276838Z ==> Deploying...
+2025-12-18T13:24:40.817262916Z ==> Running 'npm run start'
+2025-12-18T13:24:41.918754986Z 
+2025-12-18T13:24:41.918787867Z > rest-express@1.0.0 start
+2025-12-18T13:24:41.918794207Z > NODE_ENV=production node dist/index.cjs
+2025-12-18T13:24:41.918797167Z 
+2025-12-18T13:24:43.219741931Z 1:24:43 PM [websocket] WebSocket server initialized
+2025-12-18T13:24:43.226993756Z 1:24:43 PM [express] serving on port 10000
+2025-12-18T13:24:44.6631824Z ==> Your service is live 🎉
+2025-12-18T13:24:44.75336855Z ==> 
+2025-12-18T13:24:44.840251779Z ==> ///////////////////////////////////////////////////////////
+2025-12-18T13:24:44.925911529Z ==> 
+2025-12-18T13:24:45.013574418Z ==> Available at your primary URL https://janjiin.onrender.com
+2025-12-18T13:24:45.108896068Z ==> 
+2025-12-18T13:24:45.195872727Z ==> ///////////////////////////////////////////////////////////
