@@ -1,4 +1,3 @@
-import { randomUUID } from "crypto";
 import {
   type Business,
   type InsertBusiness,
@@ -23,13 +22,26 @@ import {
   type InsertSubscription,
   type Payment,
   type InsertPayment,
-  type UserRole,
   type PaymentStatus,
   type AppointmentStatus,
+  type UserRole,
+  type SubscriptionTier,
   SERVICE_TEMPLATES,
   type BusinessCategory,
-  type DayOfWeek
+  type DayOfWeek,
+  users,
+  businesses,
+  operatingHours,
+  services,
+  staff,
+  customers,
+  appointments,
+  messages,
+  subscriptions,
+  payments,
 } from "@shared/schema";
+import { db } from "./db";
+import { eq, and, gte, lte, desc, asc, count, sum, not } from "drizzle-orm";
 
 export interface IStorage {
   // Auth / Users
@@ -123,284 +135,99 @@ export interface IStorage {
   getAdminStats(): Promise<{ totalBusinesses: number; totalUsers: number; totalAppointments: number; totalRevenue: number }>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private businesses: Map<string, Business>;
-  private operatingHours: Map<string, OperatingHours>;
-  private services: Map<string, Service>;
-  private staff: Map<string, Staff>;
-  private customers: Map<string, Customer>;
-  private appointments: Map<string, Appointment>;
-  private messages: Map<string, Message>;
-  private subscriptions: Map<string, Subscription>;
-  private payments: Map<string, Payment>;
-
-  constructor() {
-    this.users = new Map();
-    this.businesses = new Map();
-    this.operatingHours = new Map();
-    this.services = new Map();
-    this.staff = new Map();
-    this.customers = new Map();
-    this.appointments = new Map();
-    this.messages = new Map();
-    this.subscriptions = new Map();
-    this.payments = new Map();
-
-    this.seedDemoData();
-  }
-
-  private seedDemoData() {
-    // Create demo business
-    const demoBusinessId = "demo-business-1";
-    const demoBusiness: Business = {
-      id: demoBusinessId,
-      name: "Barbershop Asgar 99",
-      slug: "asgar99",
-      description: "Ganteng Maksimal dalam 30 menit",
-      category: "barbershop",
-      ownerEmail: "demo@janji.in",
-      ownerName: "Asgar",
-      phone: "08123456789",
-      address: "Jl. Raya No. 123, Jakarta Selatan",
-      logoUrl: null,
-      isActive: true,
-      subscriptionTier: "pro",
-      createdAt: new Date(),
-    };
-    this.businesses.set(demoBusinessId, demoBusiness);
-
-    // Create demo user with proper User type
-    // Password: "demo123" hashed with bcrypt
-    const demoUser: User = {
-      id: "demo-user",
-      email: "demo@janji.in",
-      password: "$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW", // "demo123"
-      role: "business",
-      businessId: demoBusinessId,
-      resetToken: null,
-      resetTokenExpiry: null,
-      isActive: true,
-      createdAt: new Date(),
-    };
-    this.users.set("demo-user", demoUser);
-
-    // Create admin user
-    // Password: "admin123" hashed with bcrypt
-    const adminUser: User = {
-      id: "admin-user",
-      email: "admin@janji.in",
-      password: "$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW", // "admin123"
-      role: "admin",
-      businessId: null,
-      resetToken: null,
-      resetTokenExpiry: null,
-      isActive: true,
-      createdAt: new Date(),
-    };
-    this.users.set("admin-user", adminUser);
-
-    // Create demo staff
-    const staff1: Staff = {
-      id: "staff-1",
-      businessId: demoBusinessId,
-      name: "Budi",
-      email: "budi@barbershop.com",
-      phone: "08111111111",
-      avatarUrl: null,
-      isActive: true,
-    };
-    const staff2: Staff = {
-      id: "staff-2",
-      businessId: demoBusinessId,
-      name: "Anto",
-      email: "anto@barbershop.com",
-      phone: "08222222222",
-      avatarUrl: null,
-      isActive: true,
-    };
-    this.staff.set(staff1.id, staff1);
-    this.staff.set(staff2.id, staff2);
-
-    // Create demo services
-    const services = SERVICE_TEMPLATES.barbershop.map((template, index) => ({
-      id: `service-${index + 1}`,
-      businessId: demoBusinessId,
-      name: template.name,
-      description: template.description,
-      duration: template.duration,
-      price: template.price,
-      isActive: true,
-    }));
-    services.forEach((s) => this.services.set(s.id, s));
-
-    // Create operating hours
-    const days: DayOfWeek[] = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-    days.forEach((day, index) => {
-      const oh: OperatingHours = {
-        id: `oh-${index}`,
-        businessId: demoBusinessId,
-        dayOfWeek: day,
-        openTime: "09:00",
-        closeTime: "21:00",
-        isClosed: false,
-      };
-      this.operatingHours.set(oh.id, oh);
-    });
-
-    // Add Sunday as closed
-    const sundayOh: OperatingHours = {
-      id: "oh-6",
-      businessId: demoBusinessId,
-      dayOfWeek: "sunday",
-      openTime: "09:00",
-      closeTime: "21:00",
-      isClosed: true,
-    };
-    this.operatingHours.set(sundayOh.id, sundayOh);
-
-    // Create sample appointments
-    const now = new Date();
-    const appointments: Appointment[] = [
-      {
-        id: "apt-1",
-        businessId: demoBusinessId,
-        serviceId: "service-1",
-        staffId: "staff-1",
-        customerId: null,
-        customerName: "Pak Eko",
-        customerPhone: "08333333333",
-        startTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0),
-        endTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 45),
-        status: "confirmed",
-        notes: null,
-        totalPrice: 50000,
-        depositPaid: 0,
-        paymentStatus: "unpaid",
-        rescheduleRequestedAt: null,
-        rescheduleReason: null,
-        suggestedSlot: null,
-        suggestedSlotMessage: null,
-        paymentIntentId: null,
-        createdAt: new Date(),
-      },
-      {
-        id: "apt-2",
-        businessId: demoBusinessId,
-        serviceId: "service-2",
-        staffId: "staff-2",
-        customerId: null,
-        customerName: "Mas Tono",
-        customerPhone: "08444444444",
-        startTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 14, 0),
-        endTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 14, 30),
-        status: "pending",
-        notes: null,
-        totalPrice: 35000,
-        depositPaid: 0,
-        paymentStatus: "unpaid",
-        rescheduleRequestedAt: null,
-        rescheduleReason: null,
-        suggestedSlot: null,
-        suggestedSlotMessage: null,
-        paymentIntentId: null,
-        createdAt: new Date(),
-      },
-    ];
-    appointments.forEach((a) => this.appointments.set(a.id, a));
-  }
-
+export class DatabaseStorage implements IStorage {
   // ============= AUTH / USERS =============
   async getUserByEmail(email: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find((u) => u.email === email);
+    const [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    return user;
   }
 
   async getUserById(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id)).limit(1);
+    return user;
   }
 
   async createUser(data: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = {
-      id,
+    const role: UserRole = (data.role as UserRole) || "business";
+    const [user] = await db.insert(users).values({
       email: data.email,
       password: data.password,
-      role: data.role || "business",
+      role,
       businessId: data.businessId || null,
-      resetToken: null,
-      resetTokenExpiry: null,
-      isActive: true,
-      createdAt: new Date(),
-    };
-    this.users.set(id, user);
+    }).returning();
     return user;
   }
 
   async updateUser(id: string, data: Partial<InsertUser>): Promise<User> {
-    const user = this.users.get(id);
+    const updateData: Record<string, unknown> = {};
+    if (data.email !== undefined) updateData.email = data.email;
+    if (data.password !== undefined) updateData.password = data.password;
+    if (data.role !== undefined) updateData.role = data.role as UserRole;
+    if (data.businessId !== undefined) updateData.businessId = data.businessId;
+    if (data.resetToken !== undefined) updateData.resetToken = data.resetToken;
+    if (data.resetTokenExpiry !== undefined) updateData.resetTokenExpiry = data.resetTokenExpiry;
+    if (data.isActive !== undefined) updateData.isActive = data.isActive;
+
+    const [user] = await db.update(users).set(updateData).where(eq(users.id, id)).returning();
     if (!user) throw new Error("User not found");
-    const updated = { ...user, ...data };
-    this.users.set(id, updated);
-    return updated;
+    return user;
   }
 
   async updateUserBusinessId(userId: string, businessId: string): Promise<void> {
-    const user = this.users.get(userId);
-    if (user) {
-      user.businessId = businessId;
-      this.users.set(userId, user);
-    }
+    await db.update(users).set({ businessId }).where(eq(users.id, userId));
   }
 
   async setResetToken(email: string, token: string, expiry: Date): Promise<boolean> {
-    const user = await this.getUserByEmail(email);
-    if (!user) return false;
-    user.resetToken = token;
-    user.resetTokenExpiry = expiry;
-    this.users.set(user.id, user);
-    return true;
+    const result = await db.update(users)
+      .set({ resetToken: token, resetTokenExpiry: expiry })
+      .where(eq(users.email, email))
+      .returning();
+    return result.length > 0;
   }
 
   async getUserByResetToken(token: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (u) => u.resetToken === token && u.resetTokenExpiry && u.resetTokenExpiry > new Date()
-    );
+    const [user] = await db.select().from(users)
+      .where(and(
+        eq(users.resetToken, token),
+        gte(users.resetTokenExpiry, new Date())
+      ))
+      .limit(1);
+    return user;
   }
 
   async clearResetToken(userId: string): Promise<void> {
-    const user = this.users.get(userId);
-    if (user) {
-      user.resetToken = null;
-      user.resetTokenExpiry = null;
-      this.users.set(userId, user);
-    }
+    await db.update(users)
+      .set({ resetToken: null, resetTokenExpiry: null })
+      .where(eq(users.id, userId));
   }
 
   async getAllUsers(): Promise<User[]> {
-    return Array.from(this.users.values());
+    return await db.select().from(users);
   }
 
   // ============= BUSINESSES =============
   async getBusiness(id: string): Promise<Business | undefined> {
-    return this.businesses.get(id);
+    const [business] = await db.select().from(businesses).where(eq(businesses.id, id)).limit(1);
+    return business;
   }
 
   async getBusinessBySlug(slug: string): Promise<Business | undefined> {
-    return Array.from(this.businesses.values()).find((b) => b.slug === slug);
+    const [business] = await db.select().from(businesses).where(eq(businesses.slug, slug)).limit(1);
+    return business;
   }
 
   async getBusinessByOwnerEmail(email: string): Promise<Business | undefined> {
-    return Array.from(this.businesses.values()).find((b) => b.ownerEmail === email);
+    const [business] = await db.select().from(businesses).where(eq(businesses.ownerEmail, email)).limit(1);
+    return business;
   }
 
   async createBusiness(business: InsertBusiness): Promise<Business> {
-    const id = randomUUID();
-    const newBusiness: Business = {
-      id,
+    const category: BusinessCategory = business.category as BusinessCategory;
+    const [newBusiness] = await db.insert(businesses).values({
       name: business.name,
       slug: business.slug,
       description: business.description || null,
-      category: business.category,
+      category,
       ownerEmail: business.ownerEmail,
       ownerName: business.ownerName,
       phone: business.phone || null,
@@ -408,62 +235,89 @@ export class MemStorage implements IStorage {
       logoUrl: business.logoUrl || null,
       isActive: business.isActive ?? true,
       subscriptionTier: business.subscriptionTier ?? "free",
-      createdAt: new Date(),
-    };
-    this.businesses.set(id, newBusiness);
+    }).returning();
     return newBusiness;
   }
 
   async updateBusiness(id: string, updates: Partial<InsertBusiness>): Promise<Business> {
-    const business = this.businesses.get(id);
+    const updateData: Record<string, unknown> = {};
+    if (updates.name !== undefined) updateData.name = updates.name;
+    if (updates.slug !== undefined) updateData.slug = updates.slug;
+    if (updates.description !== undefined) updateData.description = updates.description;
+    if (updates.category !== undefined) updateData.category = updates.category as BusinessCategory;
+    if (updates.ownerEmail !== undefined) updateData.ownerEmail = updates.ownerEmail;
+    if (updates.ownerName !== undefined) updateData.ownerName = updates.ownerName;
+    if (updates.phone !== undefined) updateData.phone = updates.phone;
+    if (updates.address !== undefined) updateData.address = updates.address;
+    if (updates.logoUrl !== undefined) updateData.logoUrl = updates.logoUrl;
+    if (updates.isActive !== undefined) updateData.isActive = updates.isActive;
+    if (updates.subscriptionTier !== undefined) updateData.subscriptionTier = updates.subscriptionTier;
+
+    const [business] = await db.update(businesses).set(updateData).where(eq(businesses.id, id)).returning();
     if (!business) throw new Error("Business not found");
-    const updated = { ...business, ...updates };
-    this.businesses.set(id, updated);
-    return updated;
+    return business;
   }
 
   async checkSlugAvailable(slug: string): Promise<boolean> {
-    return !Array.from(this.businesses.values()).some((b) => b.slug === slug);
+    const [existing] = await db.select().from(businesses).where(eq(businesses.slug, slug)).limit(1);
+    return !existing;
   }
 
   async getAllBusinesses(): Promise<Business[]> {
-    return Array.from(this.businesses.values());
+    return await db.select().from(businesses);
   }
 
   async deactivateBusiness(id: string): Promise<void> {
-    const business = this.businesses.get(id);
-    if (business) {
-      business.isActive = false;
-      this.businesses.set(id, business);
-    }
+    await db.update(businesses).set({ isActive: false }).where(eq(businesses.id, id));
   }
 
   // ============= OPERATING HOURS =============
   async getOperatingHours(businessId: string): Promise<OperatingHours[]> {
-    return Array.from(this.operatingHours.values()).filter((oh) => oh.businessId === businessId);
+    return await db.select().from(operatingHours).where(eq(operatingHours.businessId, businessId));
   }
 
   async createOperatingHours(hours: InsertOperatingHours): Promise<OperatingHours> {
-    const id = randomUUID();
-    const oh: OperatingHours = {
-      id,
+    const dayOfWeek: DayOfWeek = hours.dayOfWeek as DayOfWeek;
+    const [oh] = await db.insert(operatingHours).values({
       businessId: hours.businessId,
-      dayOfWeek: hours.dayOfWeek,
+      dayOfWeek,
       openTime: hours.openTime,
       closeTime: hours.closeTime,
       isClosed: hours.isClosed ?? false,
-    };
-    this.operatingHours.set(id, oh);
+    }).returning();
     return oh;
   }
 
   async updateOperatingHours(businessId: string, dayOfWeek: DayOfWeek, updates: Partial<InsertOperatingHours>): Promise<OperatingHours> {
-    const existing = Array.from(this.operatingHours.values()).find(
-      (oh) => oh.businessId === businessId && oh.dayOfWeek === dayOfWeek
-    );
-    if (!existing) throw new Error("Operating hours not found");
-    const updated: OperatingHours = { ...existing, ...updates };
-    this.operatingHours.set(existing.id, updated);
+    const [existing] = await db.select().from(operatingHours)
+      .where(and(
+        eq(operatingHours.businessId, businessId),
+        eq(operatingHours.dayOfWeek, dayOfWeek)
+      ))
+      .limit(1);
+
+    if (!existing) {
+      return await this.createOperatingHours({
+        businessId,
+        dayOfWeek,
+        openTime: updates.openTime || "09:00",
+        closeTime: updates.closeTime || "17:00",
+        isClosed: updates.isClosed ?? false,
+      });
+    }
+
+    const updateData: Record<string, unknown> = {};
+    if (updates.openTime !== undefined) updateData.openTime = updates.openTime;
+    if (updates.closeTime !== undefined) updateData.closeTime = updates.closeTime;
+    if (updates.isClosed !== undefined) updateData.isClosed = updates.isClosed;
+
+    const [updated] = await db.update(operatingHours)
+      .set(updateData)
+      .where(and(
+        eq(operatingHours.businessId, businessId),
+        eq(operatingHours.dayOfWeek, dayOfWeek)
+      ))
+      .returning();
     return updated;
   }
 
@@ -485,47 +339,47 @@ export class MemStorage implements IStorage {
 
   // ============= SERVICES =============
   async getServices(businessId: string): Promise<Service[]> {
-    return Array.from(this.services.values()).filter((s) => s.businessId === businessId && s.isActive);
+    return await db.select().from(services)
+      .where(and(eq(services.businessId, businessId), eq(services.isActive, true)));
   }
 
   async getService(id: string): Promise<Service | undefined> {
-    return this.services.get(id);
+    const [service] = await db.select().from(services).where(eq(services.id, id)).limit(1);
+    return service;
   }
 
   async createService(service: InsertService): Promise<Service> {
-    const id = randomUUID();
-    const newService: Service = {
-      id,
+    const [newService] = await db.insert(services).values({
       businessId: service.businessId,
       name: service.name,
       description: service.description || null,
       duration: service.duration,
       price: service.price,
       isActive: service.isActive ?? true,
-    };
-    this.services.set(id, newService);
+    }).returning();
     return newService;
   }
 
   async updateService(id: string, updates: Partial<InsertService>): Promise<Service> {
-    const service = this.services.get(id);
+    const updateData: Record<string, unknown> = {};
+    if (updates.name !== undefined) updateData.name = updates.name;
+    if (updates.description !== undefined) updateData.description = updates.description;
+    if (updates.duration !== undefined) updateData.duration = updates.duration;
+    if (updates.price !== undefined) updateData.price = updates.price;
+    if (updates.isActive !== undefined) updateData.isActive = updates.isActive;
+
+    const [service] = await db.update(services).set(updateData).where(eq(services.id, id)).returning();
     if (!service) throw new Error("Service not found");
-    const updated = { ...service, ...updates };
-    this.services.set(id, updated);
-    return updated;
+    return service;
   }
 
   async deleteService(id: string): Promise<void> {
-    const service = this.services.get(id);
-    if (service) {
-      service.isActive = false;
-      this.services.set(id, service);
-    }
+    await db.update(services).set({ isActive: false }).where(eq(services.id, id));
   }
 
   async createServicesFromTemplate(businessId: string, category: BusinessCategory): Promise<Service[]> {
     const templates = SERVICE_TEMPLATES[category] || [];
-    const services: Service[] = [];
+    const createdServices: Service[] = [];
     for (const template of templates) {
       const service = await this.createService({
         businessId,
@@ -534,89 +388,96 @@ export class MemStorage implements IStorage {
         duration: template.duration,
         price: template.price,
       });
-      services.push(service);
+      createdServices.push(service);
     }
-    return services;
+    return createdServices;
   }
 
   // ============= STAFF =============
   async getStaff(businessId: string): Promise<Staff[]> {
-    return Array.from(this.staff.values()).filter((s) => s.businessId === businessId && s.isActive);
+    return await db.select().from(staff)
+      .where(and(eq(staff.businessId, businessId), eq(staff.isActive, true)));
   }
 
   async getStaffMember(id: string): Promise<Staff | undefined> {
-    return this.staff.get(id);
+    const [member] = await db.select().from(staff).where(eq(staff.id, id)).limit(1);
+    return member;
   }
 
   async createStaff(staffData: InsertStaff): Promise<Staff> {
-    const id = randomUUID();
-    const newStaff: Staff = {
-      id,
+    const [newStaff] = await db.insert(staff).values({
       businessId: staffData.businessId,
       name: staffData.name,
       email: staffData.email || null,
       phone: staffData.phone || null,
       avatarUrl: staffData.avatarUrl || null,
       isActive: staffData.isActive ?? true,
-    };
-    this.staff.set(id, newStaff);
+    }).returning();
     return newStaff;
   }
 
   async updateStaff(id: string, updates: Partial<InsertStaff>): Promise<Staff> {
-    const staffMember = this.staff.get(id);
+    const updateData: Record<string, unknown> = {};
+    if (updates.name !== undefined) updateData.name = updates.name;
+    if (updates.email !== undefined) updateData.email = updates.email;
+    if (updates.phone !== undefined) updateData.phone = updates.phone;
+    if (updates.avatarUrl !== undefined) updateData.avatarUrl = updates.avatarUrl;
+    if (updates.isActive !== undefined) updateData.isActive = updates.isActive;
+
+    const [staffMember] = await db.update(staff).set(updateData).where(eq(staff.id, id)).returning();
     if (!staffMember) throw new Error("Staff not found");
-    const updated = { ...staffMember, ...updates };
-    this.staff.set(id, updated);
-    return updated;
+    return staffMember;
   }
 
   async deleteStaff(id: string): Promise<void> {
-    const staffMember = this.staff.get(id);
-    if (staffMember) {
-      staffMember.isActive = false;
-      this.staff.set(id, staffMember);
-    }
+    await db.update(staff).set({ isActive: false }).where(eq(staff.id, id));
   }
 
   async toggleStaffStatus(id: string): Promise<Staff> {
-    const staffMember = this.staff.get(id);
-    if (!staffMember) throw new Error("Staff not found");
-    staffMember.isActive = !staffMember.isActive;
-    this.staff.set(id, staffMember);
-    return staffMember;
+    const [existing] = await db.select().from(staff).where(eq(staff.id, id)).limit(1);
+    if (!existing) throw new Error("Staff not found");
+    const [updated] = await db.update(staff)
+      .set({ isActive: !existing.isActive })
+      .where(eq(staff.id, id))
+      .returning();
+    return updated;
   }
 
   // ============= APPOINTMENTS =============
   async getAppointments(businessId: string): Promise<Appointment[]> {
-    return Array.from(this.appointments.values())
-      .filter((a) => a.businessId === businessId)
-      .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
+    return await db.select().from(appointments)
+      .where(eq(appointments.businessId, businessId))
+      .orderBy(asc(appointments.startTime));
   }
 
   async getAppointmentsWithDetails(businessId: string): Promise<AppointmentWithDetails[]> {
-    const appointments = await this.getAppointments(businessId);
-    const result: AppointmentWithDetails[] = [];
+    const result = await db.select({
+      appointment: appointments,
+      service: services,
+      staffMember: staff,
+    })
+      .from(appointments)
+      .innerJoin(services, eq(appointments.serviceId, services.id))
+      .innerJoin(staff, eq(appointments.staffId, staff.id))
+      .where(eq(appointments.businessId, businessId))
+      .orderBy(asc(appointments.startTime));
 
-    for (const apt of appointments) {
-      const service = this.services.get(apt.serviceId);
-      const staffMember = this.staff.get(apt.staffId);
-      if (service && staffMember) {
-        result.push({ ...apt, service, staff: staffMember });
-      }
-    }
-
-    return result;
+    return result.map(row => ({
+      ...row.appointment,
+      service: row.service,
+      staff: row.staffMember,
+    }));
   }
 
   async getAppointment(id: string): Promise<Appointment | undefined> {
-    return this.appointments.get(id);
+    const [appointment] = await db.select().from(appointments).where(eq(appointments.id, id)).limit(1);
+    return appointment;
   }
 
   async createAppointment(appointment: InsertAppointment): Promise<Appointment> {
-    const id = randomUUID();
-    const newAppointment: Appointment = {
-      id,
+    const status: AppointmentStatus = (appointment.status as AppointmentStatus) ?? "pending";
+    const paymentStatus: PaymentStatus = (appointment.paymentStatus as PaymentStatus) ?? "unpaid";
+    const [newAppointment] = await db.insert(appointments).values({
       businessId: appointment.businessId,
       serviceId: appointment.serviceId,
       staffId: appointment.staffId,
@@ -625,66 +486,64 @@ export class MemStorage implements IStorage {
       customerPhone: appointment.customerPhone,
       startTime: appointment.startTime,
       endTime: appointment.endTime,
-      status: appointment.status ?? "pending",
+      status,
       notes: appointment.notes || null,
       totalPrice: appointment.totalPrice,
       depositPaid: appointment.depositPaid ?? 0,
-      paymentStatus: appointment.paymentStatus ?? "unpaid",
-      rescheduleRequestedAt: null,
-      rescheduleReason: null,
-      suggestedSlot: null,
-      suggestedSlotMessage: null,
-      paymentIntentId: null,
-      createdAt: new Date(),
-    };
-    this.appointments.set(id, newAppointment);
+      paymentStatus,
+    }).returning();
     return newAppointment;
   }
 
   async updateAppointmentStatus(id: string, status: AppointmentStatus): Promise<Appointment> {
-    const appointment = this.appointments.get(id);
+    const [appointment] = await db.update(appointments)
+      .set({ status })
+      .where(eq(appointments.id, id))
+      .returning();
     if (!appointment) throw new Error("Appointment not found");
-    appointment.status = status;
-    this.appointments.set(id, appointment);
     return appointment;
   }
 
   async updateAppointmentPaymentStatus(id: string, paymentStatus: PaymentStatus): Promise<Appointment> {
-    const appointment = this.appointments.get(id);
+    const [appointment] = await db.update(appointments)
+      .set({ paymentStatus })
+      .where(eq(appointments.id, id))
+      .returning();
     if (!appointment) throw new Error("Appointment not found");
-    appointment.paymentStatus = paymentStatus;
-    this.appointments.set(id, appointment);
     return appointment;
   }
 
   async requestReschedule(id: string, reason: string): Promise<Appointment> {
-    const appointment = this.appointments.get(id);
+    const [appointment] = await db.update(appointments)
+      .set({ rescheduleRequestedAt: new Date(), rescheduleReason: reason })
+      .where(eq(appointments.id, id))
+      .returning();
     if (!appointment) throw new Error("Appointment not found");
-    appointment.rescheduleRequestedAt = new Date();
-    appointment.rescheduleReason = reason;
-    this.appointments.set(id, appointment);
     return appointment;
   }
 
   async suggestRescheduleSlot(id: string, suggestedSlot: Date, message?: string): Promise<Appointment> {
-    const appointment = this.appointments.get(id);
+    const [appointment] = await db.update(appointments)
+      .set({ suggestedSlot, suggestedSlotMessage: message || null })
+      .where(eq(appointments.id, id))
+      .returning();
     if (!appointment) throw new Error("Appointment not found");
-    appointment.suggestedSlot = suggestedSlot;
-    appointment.suggestedSlotMessage = message || null;
-    this.appointments.set(id, appointment);
     return appointment;
   }
 
   async confirmReschedule(id: string, newStartTime: Date, newEndTime: Date): Promise<Appointment> {
-    const appointment = this.appointments.get(id);
+    const [appointment] = await db.update(appointments)
+      .set({
+        startTime: newStartTime,
+        endTime: newEndTime,
+        rescheduleRequestedAt: null,
+        rescheduleReason: null,
+        suggestedSlot: null,
+        suggestedSlotMessage: null,
+      })
+      .where(eq(appointments.id, id))
+      .returning();
     if (!appointment) throw new Error("Appointment not found");
-    appointment.startTime = newStartTime;
-    appointment.endTime = newEndTime;
-    appointment.rescheduleRequestedAt = null;
-    appointment.rescheduleReason = null;
-    appointment.suggestedSlot = null;
-    appointment.suggestedSlotMessage = null;
-    this.appointments.set(id, appointment);
     return appointment;
   }
 
@@ -694,215 +553,220 @@ export class MemStorage implements IStorage {
     const endOfDay = new Date(date);
     endOfDay.setHours(23, 59, 59, 999);
 
-    const appointments = await this.getAppointmentsWithDetails(businessId);
-    return appointments.filter((apt) => {
-      const aptDate = new Date(apt.startTime);
-      return aptDate >= startOfDay && aptDate <= endOfDay;
-    });
+    const result = await db.select({
+      appointment: appointments,
+      service: services,
+      staffMember: staff,
+    })
+      .from(appointments)
+      .innerJoin(services, eq(appointments.serviceId, services.id))
+      .innerJoin(staff, eq(appointments.staffId, staff.id))
+      .where(and(
+        eq(appointments.businessId, businessId),
+        gte(appointments.startTime, startOfDay),
+        lte(appointments.startTime, endOfDay)
+      ))
+      .orderBy(asc(appointments.startTime));
+
+    return result.map(row => ({
+      ...row.appointment,
+      service: row.service,
+      staff: row.staffMember,
+    }));
   }
 
   // ============= CUSTOMERS =============
   async getCustomer(id: string): Promise<Customer | undefined> {
-    return this.customers.get(id);
+    const [customer] = await db.select().from(customers).where(eq(customers.id, id)).limit(1);
+    return customer;
   }
 
   async getCustomerByPhone(businessId: string, phone: string): Promise<Customer | undefined> {
-    return Array.from(this.customers.values()).find(
-      (c) => c.businessId === businessId && c.phone === phone
-    );
+    const [customer] = await db.select().from(customers)
+      .where(and(eq(customers.businessId, businessId), eq(customers.phone, phone)))
+      .limit(1);
+    return customer;
   }
 
   async createCustomer(customer: InsertCustomer): Promise<Customer> {
-    const id = randomUUID();
-    const newCustomer: Customer = {
-      id,
+    const [newCustomer] = await db.insert(customers).values({
       businessId: customer.businessId,
       name: customer.name,
       phone: customer.phone,
       email: customer.email || null,
       notes: customer.notes || null,
-      createdAt: new Date(),
-    };
-    this.customers.set(id, newCustomer);
+    }).returning();
     return newCustomer;
   }
 
   async getCustomersByBusiness(businessId: string): Promise<Customer[]> {
-    return Array.from(this.customers.values()).filter((c) => c.businessId === businessId);
+    return await db.select().from(customers).where(eq(customers.businessId, businessId));
   }
 
   // ============= MESSAGES =============
   async getMessages(businessId: string, appointmentId?: string): Promise<Message[]> {
-    return Array.from(this.messages.values())
-      .filter((m) => m.businessId === businessId && (!appointmentId || m.appointmentId === appointmentId))
-      .sort((a, b) => new Date(a.createdAt!).getTime() - new Date(b.createdAt!).getTime());
+    if (appointmentId) {
+      return await db.select().from(messages)
+        .where(and(eq(messages.businessId, businessId), eq(messages.appointmentId, appointmentId)))
+        .orderBy(asc(messages.createdAt));
+    }
+    return await db.select().from(messages)
+      .where(eq(messages.businessId, businessId))
+      .orderBy(asc(messages.createdAt));
   }
 
   async createMessage(message: InsertMessage): Promise<Message> {
-    const id = randomUUID();
-    const newMessage: Message = {
-      id,
+    const senderRole = message.senderRole as "admin" | "business" | "customer";
+    const [newMessage] = await db.insert(messages).values({
       appointmentId: message.appointmentId || null,
       businessId: message.businessId,
       senderId: message.senderId,
-      senderRole: message.senderRole,
+      senderRole,
       senderName: message.senderName,
       content: message.content,
       isRead: false,
-      createdAt: new Date(),
-    };
-    this.messages.set(id, newMessage);
+    }).returning();
     return newMessage;
   }
 
   async markMessagesAsRead(messageIds: string[]): Promise<void> {
+    if (messageIds.length === 0) return;
     for (const id of messageIds) {
-      const message = this.messages.get(id);
-      if (message) {
-        message.isRead = true;
-        this.messages.set(id, message);
-      }
+      await db.update(messages).set({ isRead: true }).where(eq(messages.id, id));
     }
   }
 
   async getUnreadMessageCount(businessId: string): Promise<number> {
-    return Array.from(this.messages.values()).filter(
-      (m) => m.businessId === businessId && !m.isRead
-    ).length;
+    const result = await db.select({ count: count() }).from(messages)
+      .where(and(eq(messages.businessId, businessId), eq(messages.isRead, false)));
+    return result[0]?.count ?? 0;
   }
 
   // ============= SUBSCRIPTIONS =============
   async getSubscription(businessId: string): Promise<Subscription | undefined> {
-    return Array.from(this.subscriptions.values())
-      .filter((s) => s.businessId === businessId && s.status === "active")
-      .sort((a, b) => new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime())[0];
+    const [subscription] = await db.select().from(subscriptions)
+      .where(and(eq(subscriptions.businessId, businessId), eq(subscriptions.status, "active")))
+      .orderBy(desc(subscriptions.createdAt))
+      .limit(1);
+    return subscription;
   }
 
   async createSubscription(subscription: InsertSubscription): Promise<Subscription> {
-    const id = randomUUID();
-    const newSubscription: Subscription = {
-      id,
+    const tier: SubscriptionTier = subscription.tier as SubscriptionTier;
+    const [newSubscription] = await db.insert(subscriptions).values({
       businessId: subscription.businessId,
-      tier: subscription.tier,
+      tier,
       startDate: subscription.startDate,
       endDate: subscription.endDate || null,
       paymentId: subscription.paymentId || null,
       amount: subscription.amount || null,
       status: subscription.status ?? "pending",
-      createdAt: new Date(),
-    };
-    this.subscriptions.set(id, newSubscription);
+    }).returning();
     return newSubscription;
   }
 
   async activateSubscription(id: string): Promise<Subscription> {
-    const subscription = this.subscriptions.get(id);
+    const [subscription] = await db.select().from(subscriptions).where(eq(subscriptions.id, id)).limit(1);
     if (!subscription) throw new Error("Subscription not found");
 
-    subscription.status = "active";
-    subscription.startDate = new Date();
-    // Set end date to 30 days from now
     const endDate = new Date();
     endDate.setDate(endDate.getDate() + 30);
-    subscription.endDate = endDate;
 
-    // Update business tier
-    const business = this.businesses.get(subscription.businessId);
-    if (business) {
-      business.subscriptionTier = subscription.tier;
-      this.businesses.set(business.id, business);
-    }
+    const [updated] = await db.update(subscriptions)
+      .set({ status: "active", startDate: new Date(), endDate })
+      .where(eq(subscriptions.id, id))
+      .returning();
 
-    this.subscriptions.set(id, subscription);
-    return subscription;
+    await db.update(businesses)
+      .set({ subscriptionTier: subscription.tier })
+      .where(eq(businesses.id, subscription.businessId));
+
+    return updated;
   }
 
   async cancelSubscription(id: string): Promise<void> {
-    const subscription = this.subscriptions.get(id);
-    if (subscription) {
-      subscription.status = "cancelled";
-      this.subscriptions.set(id, subscription);
-    }
+    await db.update(subscriptions).set({ status: "cancelled" }).where(eq(subscriptions.id, id));
   }
 
   // ============= PAYMENTS =============
   async getPayment(id: string): Promise<Payment | undefined> {
-    return this.payments.get(id);
+    const [payment] = await db.select().from(payments).where(eq(payments.id, id)).limit(1);
+    return payment;
   }
 
   async getPaymentByOrderId(orderId: string): Promise<Payment | undefined> {
-    return Array.from(this.payments.values()).find((p) => p.externalId === orderId);
+    const [payment] = await db.select().from(payments).where(eq(payments.externalId, orderId)).limit(1);
+    return payment;
   }
 
   async createPayment(payment: InsertPayment): Promise<Payment> {
-    const id = randomUUID();
-    const newPayment: Payment = {
-      id,
+    const status: PaymentStatus = (payment.status as PaymentStatus) ?? "pending";
+    const [newPayment] = await db.insert(payments).values({
       businessId: payment.businessId,
       appointmentId: payment.appointmentId || null,
       subscriptionId: payment.subscriptionId || null,
       amount: payment.amount,
       currency: payment.currency ?? "IDR",
-      status: payment.status ?? "pending",
+      status,
       paymentMethod: payment.paymentMethod || null,
       paymentGateway: payment.paymentGateway ?? "midtrans",
       externalId: payment.externalId || null,
-      paidAt: null,
       metadata: payment.metadata || null,
-      createdAt: new Date(),
-    };
-    this.payments.set(id, newPayment);
+    }).returning();
     return newPayment;
   }
 
   async updatePaymentStatus(orderId: string, status: PaymentStatus, transactionId?: string): Promise<Payment> {
-    const payment = await this.getPaymentByOrderId(orderId);
-    if (!payment) throw new Error("Payment not found");
-    payment.status = status;
+    const updateData: Record<string, unknown> = { status };
     if (status === "paid") {
-      payment.paidAt = new Date();
+      updateData.paidAt = new Date();
     }
     if (transactionId) {
-      payment.externalId = transactionId;
+      updateData.externalId = transactionId;
     }
-    this.payments.set(payment.id, payment);
+    const [payment] = await db.update(payments)
+      .set(updateData)
+      .where(eq(payments.externalId, orderId))
+      .returning();
+    if (!payment) throw new Error("Payment not found");
     return payment;
   }
 
   async linkPaymentToSubscription(paymentId: string, subscriptionId: string): Promise<void> {
-    const payment = this.payments.get(paymentId);
-    if (payment) {
-      payment.subscriptionId = subscriptionId;
-      this.payments.set(paymentId, payment);
-    }
+    await db.update(payments).set({ subscriptionId }).where(eq(payments.id, paymentId));
   }
 
   async getPaymentsByBusiness(businessId: string): Promise<Payment[]> {
-    return Array.from(this.payments.values())
-      .filter((p) => p.businessId === businessId)
-      .sort((a, b) => new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime());
+    return await db.select().from(payments)
+      .where(eq(payments.businessId, businessId))
+      .orderBy(desc(payments.createdAt));
   }
 
   // ============= DASHBOARD =============
   async getDashboardStats(businessId: string): Promise<DashboardStats> {
-    const appointments = await this.getAppointments(businessId);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    const todayAppointments = appointments.filter((a) => {
-      const aptDate = new Date(a.startTime);
-      return aptDate >= today && aptDate < tomorrow;
-    });
+    const todayAppointments = await db.select().from(appointments)
+      .where(and(
+        eq(appointments.businessId, businessId),
+        gte(appointments.startTime, today),
+        lte(appointments.startTime, tomorrow)
+      ));
+
+    const pendingCount = todayAppointments.filter(a => a.status === "pending").length;
+    const completedCount = todayAppointments.filter(a => a.status === "completed").length;
+    const estimatedRevenue = todayAppointments
+      .filter(a => a.status !== "cancelled")
+      .reduce((sum, a) => sum + a.totalPrice, 0);
 
     return {
       todayBookings: todayAppointments.length,
-      pendingBookings: todayAppointments.filter((a) => a.status === "pending").length,
-      completedToday: todayAppointments.filter((a) => a.status === "completed").length,
-      estimatedRevenue: todayAppointments
-        .filter((a) => a.status !== "cancelled")
-        .reduce((sum, a) => sum + a.totalPrice, 0),
+      pendingBookings: pendingCount,
+      completedToday: completedCount,
+      estimatedRevenue,
     };
   }
 
@@ -921,29 +785,32 @@ export class MemStorage implements IStorage {
     const dayNames: DayOfWeek[] = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     const dayOfWeek = dayNames[dayIndex];
 
-    const operatingHrs = (await this.getOperatingHours(businessId)).find(
-      (oh) => oh.dayOfWeek === dayOfWeek && !oh.isClosed
-    );
+    const operatingHrs = await this.getOperatingHours(businessId);
+    const todayHours = operatingHrs.find(oh => oh.dayOfWeek === dayOfWeek && !oh.isClosed);
 
-    if (!operatingHrs) return [];
+    if (!todayHours) return [];
 
     const slots: TimeSlot[] = [];
-    const [openHour, openMin] = operatingHrs.openTime.split(":").map(Number);
-    const [closeHour, closeMin] = operatingHrs.closeTime.split(":").map(Number);
+    const openTime = todayHours.openTime as string;
+    const closeTime = todayHours.closeTime as string;
+    const [openHour, openMin] = openTime.split(":").map(Number);
+    const [closeHour, closeMin] = closeTime.split(":").map(Number);
 
     let currentMinutes = openHour * 60 + openMin;
     const endMinutes = closeHour * 60 + closeMin - service.duration;
 
-    const appointments = await this.getAppointments(businessId);
     const dateStart = new Date(date);
     dateStart.setHours(0, 0, 0, 0);
     const dateEnd = new Date(date);
     dateEnd.setHours(23, 59, 59, 999);
 
-    const dayAppointments = appointments.filter((a) => {
-      const aptDate = new Date(a.startTime);
-      return aptDate >= dateStart && aptDate <= dateEnd && a.status !== "cancelled";
-    });
+    const dayAppointments = await db.select().from(appointments)
+      .where(and(
+        eq(appointments.businessId, businessId),
+        gte(appointments.startTime, dateStart),
+        lte(appointments.startTime, dateEnd),
+        not(eq(appointments.status, "cancelled"))
+      ));
 
     while (currentMinutes <= endMinutes) {
       const hours = Math.floor(currentMinutes / 60);
@@ -959,10 +826,9 @@ export class MemStorage implements IStorage {
         if (staffId && apt.staffId !== staffId) return false;
         const aptStart = new Date(apt.startTime);
         const aptEnd = new Date(apt.endTime);
-        return (slotStart < aptEnd && slotEnd > aptStart);
+        return slotStart < aptEnd && slotEnd > aptStart;
       });
 
-      // Skip past times for today
       const now = new Date();
       const isPast = slotStart < now;
 
@@ -971,7 +837,7 @@ export class MemStorage implements IStorage {
         available: !isBooked && !isPast,
       });
 
-      currentMinutes += 30; // 30 min intervals
+      currentMinutes += 30;
     }
 
     return slots;
@@ -979,15 +845,27 @@ export class MemStorage implements IStorage {
 
   // ============= ADMIN =============
   async getAdminStats(): Promise<{ totalBusinesses: number; totalUsers: number; totalAppointments: number; totalRevenue: number }> {
-    const totalBusinesses = this.businesses.size;
-    const totalUsers = this.users.size;
-    const totalAppointments = this.appointments.size;
-    const totalRevenue = Array.from(this.payments.values())
-      .filter((p) => p.status === "paid")
-      .reduce((sum, p) => sum + p.amount, 0);
+    const [businessCount] = await db.select({ count: count() }).from(businesses);
+    const [userCount] = await db.select({ count: count() }).from(users);
+    const [appointmentCount] = await db.select({ count: count() }).from(appointments);
+    const [revenueResult] = await db.select({ total: sum(payments.amount) }).from(payments)
+      .where(eq(payments.status, "paid"));
 
-    return { totalBusinesses, totalUsers, totalAppointments, totalRevenue };
+    return {
+      totalBusinesses: businessCount?.count ?? 0,
+      totalUsers: userCount?.count ?? 0,
+      totalAppointments: appointmentCount?.count ?? 0,
+      totalRevenue: Number(revenueResult?.total) || 0,
+    };
   }
 }
 
-export const storage = new MemStorage();
+// ============= MEM STORAGE (BACKUP FOR DEVELOPMENT) =============
+/*
+export class MemStorage implements IStorage {
+  // ... The original MemStorage implementation is available in git history
+  // Can be restored if needed for development/testing purposes
+}
+*/
+
+export const storage = new DatabaseStorage();
