@@ -1,0 +1,50 @@
+2025-12-18T12:47:19.433195834Z     '    position: absolute;\n' +
+2025-12-18T12:47:19.433197514Z     '    inset: 0px;\n' +
+2025-12-18T12:47:19.433199274Z     '    /*border-radius: inherit;   match rounded corners */\n' +
+2025-12-18T12:47:19.433200934Z     '    border-radius: inherit;\n' +
+2025-12-18T12:47:19.433202624Z     '    z-index: -1;\n' +
+2025-12-18T12:47:19.433204284Z     '    /* sits behind content but above backdrop */\n' +
+2025-12-18T12:47:19.433205944Z     '  }\n' +
+2025-12-18T12:47:19.433207664Z     '\n' +
+2025-12-18T12:47:19.433209364Z     '  .toggle-elevate.toggle-elevated::before {\n' +
+2025-12-18T12:47:19.433211025Z     '    background-color: var(--elevate-2);\n' +
+2025-12-18T12:47:19.433212725Z     '  }\n' +
+2025-12-18T12:47:19.433214385Z     '\n' +
+2025-12-18T12:47:19.433216135Z     "  /* If there's a 1px border, adjust the inset so that it covers that parent's border */\n" +
+2025-12-18T12:47:19.433217805Z     '  .border.toggle-elevate::before {\n' +
+2025-12-18T12:47:19.433219475Z     '    inset: -1px;\n' +
+2025-12-18T12:47:19.433221145Z     '  }\n' +
+2025-12-18T12:47:19.433222795Z     '\n' +
+2025-12-18T12:47:19.433224495Z     '  /* Does not work on elements with overflow:hidden! */\n' +
+2025-12-18T12:47:19.433226195Z     '  .hover-elevate:not(.no-default-hover-elevate),\n' +
+2025-12-18T12:47:19.433227875Z     '  .active-elevate:not(.no-default-active-elevate),\n' +
+2025-12-18T12:47:19.433231035Z     '  .hover-elevate-2:not(.no-default-hover-elevate),\n' +
+2025-12-18T12:47:19.433232765Z     '  .active-elevate-2:not(.no-default-active-elevate) {\n' +
+2025-12-18T12:47:19.433234475Z     '    position: relative;\n' +
+2025-12-18T12:47:19.433236195Z     '    z-index: 0;\n' +
+2025-12-18T12:47:19.433237845Z     '  }\n' +
+2025-12-18T12:47:19.433239535Z     '\n' +
+2025-12-18T12:47:19.433241195Z     '  .hover-elevate:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T12:47:19.433242925Z     '  .active-elevate:not(.no-default-active-elevate)::after,\n' +
+2025-12-18T12:47:19.433244585Z     '  .hover-elevate-2:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T12:47:19.433246276Z     '  .active-elevate-2:not(.no-default-active-elevate)::after {\n' +
+2025-12-18T12:47:19.433247936Z     '    content: "";\n' +
+2025-12-18T12:47:19.433249596Z     '    pointer-events: none;\n' +
+2025-12-18T12:47:19.433251246Z     '    position: absolute;\n' +
+2025-12-18T12:47:19.433252926Z     '    inset: 0px;\n' +
+2025-12-18T12:47:19.433254566Z     '    /*border-radius: inherit;   match'... 912 more characters,
+2025-12-18T12:47:19.433256226Z   plugin: 'vite:css',
+2025-12-18T12:47:19.433257906Z   hook: 'transform',
+2025-12-18T12:47:19.433259616Z   id: '/opt/render/project/src/client/src/index.css',
+2025-12-18T12:47:19.433261266Z   watchFiles: [
+2025-12-18T12:47:19.433262976Z     '/opt/render/project/src/client/index.html',
+2025-12-18T12:47:19.433264686Z     '/opt/render/project/src/client/src/main.tsx',
+2025-12-18T12:47:19.433266366Z     '/opt/render/project/src/package.json',
+2025-12-18T12:47:19.433268026Z     '/opt/render/project/src/node_modules/react/jsx-runtime.js',
+2025-12-18T12:47:19.433269696Z     '/opt/render/project/src/node_modules/react-dom/client.js',
+2025-12-18T12:47:19.433271316Z     '/opt/render/project/src/client/src/App.tsx',
+2025-12-18T12:47:19.433272996Z     '/opt/render/project/src/client/src/index.css'
+2025-12-18T12:47:19.433277006Z   ]
+2025-12-18T12:47:19.433278816Z }
+2025-12-18T12:47:19.520903861Z ==> Build failed 😞
+2025-12-18T12:47:19.520920622Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

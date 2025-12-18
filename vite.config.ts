@@ -5,27 +5,6 @@ import path from "path";
 export default defineConfig({
   plugins: [
     react(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
-      ? [
-          (async () => {
-            try {
-              const { default: runtimeErrorOverlay } = await import(
-                "@replit/vite-plugin-runtime-error-modal"
-              );
-              return runtimeErrorOverlay();
-            } catch {
-              return null;
-            }
-          })(),
-          await import("@replit/vite-plugin-cartographer")
-            .then((m) => m.cartographer())
-            .catch(() => null),
-          await import("@replit/vite-plugin-dev-banner")
-            .then((m) => m.devBanner())
-            .catch(() => null),
-        ].filter(Boolean)
-      : []),
   ],
   resolve: {
     alias: {
