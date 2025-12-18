@@ -1,0 +1,50 @@
+2025-12-18T13:21:29.09590285Z     '  }\n' +
+2025-12-18T13:21:29.09590494Z     '\n' +
+2025-12-18T13:21:29.09590701Z     '  .hover-elevate:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:21:29.09590911Z     '  .active-elevate:not(.no-default-active-elevate)::after,\n' +
+2025-12-18T13:21:29.09591128Z     '  .hover-elevate-2:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:21:29.09591343Z     '  .active-elevate-2:not(.no-default-active-elevate)::after {\n' +
+2025-12-18T13:21:29.09591552Z     '    content: "";\n' +
+2025-12-18T13:21:29.09591759Z     '    pointer-events: none;\n' +
+2025-12-18T13:21:29.09591966Z     '    position: absolute;\n' +
+2025-12-18T13:21:29.09592172Z     '    inset: 0px;\n' +
+2025-12-18T13:21:29.09592381Z     '    /*border-radius: inherit;   match rounded corners */\n' +
+2025-12-18T13:21:29.09592588Z     '    border-radius: inherit;\n' +
+2025-12-18T13:21:29.09592794Z     '    z-index: 999;\n' +
+2025-12-18T13:21:29.09593008Z     '    /* sits in front of content */\n' +
+2025-12-18T13:21:29.095932141Z     '  }\n' +
+2025-12-18T13:21:29.09593423Z     '\n' +
+2025-12-18T13:21:29.095936421Z     '  .hover-elevate:hover:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:21:29.095938541Z     '  .active-elevate:active:not(.no-default-active-elevate)::after {\n' +
+2025-12-18T13:21:29.095940621Z     '    background-color: var(--elevate-1);\n' +
+2025-12-18T13:21:29.095942711Z     '  }\n' +
+2025-12-18T13:21:29.095944761Z     '\n' +
+2025-12-18T13:21:29.095946831Z     '  .hover-elevate-2:hover:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:21:29.095948891Z     '  .active-elevate-2:active:not(.no-default-active-elevate)::after {\n' +
+2025-12-18T13:21:29.095954051Z     '    background-color: var(--elevate-2);\n' +
+2025-12-18T13:21:29.095956221Z     '  }\n' +
+2025-12-18T13:21:29.095958281Z     '\n' +
+2025-12-18T13:21:29.095960361Z     "  /* If there's a 1px border, adjust the inset so that it covers that parent's border */\n" +
+2025-12-18T13:21:29.095962441Z     '  .border.hover-elevate:not(.no-hover-interaction-elevate)::after,\n' +
+2025-12-18T13:21:29.095964521Z     '  .border.active-elevate:not(.no-active-interaction-elevate)::after,\n' +
+2025-12-18T13:21:29.095980151Z     '  .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,\n' +
+2025-12-18T13:21:29.095994892Z     '  .border.active-elevate-2:not(.no-active-interaction-elevate)::after,\n' +
+2025-12-18T13:21:29.095998222Z     '  .border.hover-elevate:not(.no-hover-interaction-elevate)::after {\n' +
+2025-12-18T13:21:29.096001642Z     '    inset: -1px;\n' +
+2025-12-18T13:21:29.096005242Z     '  }\n' +
+2025-12-18T13:21:29.096008232Z     '}\n',
+2025-12-18T13:21:29.096010312Z   plugin: 'vite:css',
+2025-12-18T13:21:29.096012412Z   hook: 'transform',
+2025-12-18T13:21:29.096014612Z   id: '/opt/render/project/src/client/src/index.css',
+2025-12-18T13:21:29.096016702Z   watchFiles: [
+2025-12-18T13:21:29.096018792Z     '/opt/render/project/src/client/index.html',
+2025-12-18T13:21:29.096020872Z     '/opt/render/project/src/client/src/main.tsx',
+2025-12-18T13:21:29.096022932Z     '/opt/render/project/src/package.json',
+2025-12-18T13:21:29.096025073Z     '/opt/render/project/src/node_modules/react/jsx-runtime.js',
+2025-12-18T13:21:29.096027143Z     '/opt/render/project/src/node_modules/react-dom/client.js',
+2025-12-18T13:21:29.096029293Z     '/opt/render/project/src/client/src/index.css',
+2025-12-18T13:21:29.096031443Z     '/opt/render/project/src/client/src/App.tsx'
+2025-12-18T13:21:29.096033533Z   ]
+2025-12-18T13:21:29.096035733Z }
+2025-12-18T13:21:29.191003826Z ==> Build failed 😞
+2025-12-18T13:21:29.191024687Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
