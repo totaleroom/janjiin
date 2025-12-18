@@ -1,0 +1,250 @@
+2025-12-18T13:12:10.157064759Z     '  --muted-foreground: 215 18% 35%;\n' +
+2025-12-18T13:12:10.157067939Z     '  --accent: 210 12% 88%;\n' +
+2025-12-18T13:12:10.157071399Z     '  --accent-foreground: 215 22% 22%;\n' +
+2025-12-18T13:12:10.157074809Z     '  --destructive: 0 72% 42%;\n' +
+2025-12-18T13:12:10.157077459Z     '  --destructive-foreground: 0 20% 96%;\n' +
+2025-12-18T13:12:10.157079579Z     '  --input: 210 20% 70%;\n' +
+2025-12-18T13:12:10.157081739Z     '  --ring: 173 80% 35%;\n' +
+2025-12-18T13:12:10.157083799Z     '  --chart-1: 173 80% 35%;\n' +
+2025-12-18T13:12:10.157085859Z     '  --chart-2: 262 65% 45%;\n' +
+2025-12-18T13:12:10.157087959Z     '  --chart-3: 280 70% 40%;\n' +
+2025-12-18T13:12:10.157090039Z     '  --chart-4: 195 75% 38%;\n' +
+2025-12-18T13:12:10.15709224Z     '  --chart-5: 340 65% 42%;\n' +
+2025-12-18T13:12:10.157094569Z     '  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;\n' +
+2025-12-18T13:12:10.157096949Z     '  --font-serif: Georgia, serif;\n' +
+2025-12-18T13:12:10.15709912Z     '  --font-mono: Menlo, monospace;\n' +
+2025-12-18T13:12:10.15710649Z     '  --highlight: 262 65% 58%;\n' +
+2025-12-18T13:12:10.15710867Z     '  --highlight-foreground: 0 0% 100%;\n' +
+2025-12-18T13:12:10.15711078Z     '  --radius: .5rem;\n' +
+2025-12-18T13:12:10.15711299Z     '  --shadow-2xs: 0px 2px 0px 0px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T13:12:10.15711517Z     '  --shadow-xs: 0px 2px 0px 0px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T13:12:10.15711742Z     '  --shadow-sm: 0px 2px 0px 0px hsl(210 15% 70% / 0.00), 0px 1px 2px -1px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T13:12:10.15711967Z     '  --shadow: 0px 2px 0px 0px hsl(210 15% 70% / 0.00), 0px 1px 2px -1px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T13:12:10.15712177Z     '  --shadow-md: 0px 2px 0px 0px hsl(210 15% 70% / 0.00), 0px 2px 4px -1px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T13:12:10.15712402Z     '  --shadow-lg: 0px 2px 0px 0px hsl(210 15% 70% / 0.00), 0px 4px 6px -1px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T13:12:10.1571262Z     '  --shadow-xl: 0px 2px 0px 0px hsl(210 15% 70% / 0.00), 0px 8px 10px -1px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T13:12:10.15712834Z     '  --shadow-2xl: 0px 2px 0px 0px hsl(210 15% 70% / 0.00);\n' +
+2025-12-18T13:12:10.15713053Z     '  --tracking-normal: 0em;\n' +
+2025-12-18T13:12:10.15713264Z     '  --spacing: 0.25rem;\n' +
+2025-12-18T13:12:10.15713483Z     '\n' +
+2025-12-18T13:12:10.157137081Z     '/* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157148251Z     '  --sidebar-primary-border: hsl(var(--sidebar-primary));\n' +
+2025-12-18T13:12:10.157151251Z     '  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157153411Z     '\n' +
+2025-12-18T13:12:10.157155641Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157157801Z     '  --sidebar-accent-border: hsl(var(--sidebar-accent));\n' +
+2025-12-18T13:12:10.157159921Z     '  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157162081Z     '\n' +
+2025-12-18T13:12:10.157164141Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157166261Z     '  --primary-border: hsl(var(--primary));\n' +
+2025-12-18T13:12:10.157169041Z     '  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157171161Z     '\n' +
+2025-12-18T13:12:10.157173241Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157175351Z     '  --secondary-border: hsl(var(--secondary));\n' +
+2025-12-18T13:12:10.157177481Z     '  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157179621Z     '\n' +
+2025-12-18T13:12:10.157181801Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157183882Z     '  --muted-border: hsl(var(--muted));\n' +
+2025-12-18T13:12:10.157185971Z     '  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157188091Z     '\n' +
+2025-12-18T13:12:10.157190171Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157192392Z     '  --accent-border: hsl(var(--accent));\n' +
+2025-12-18T13:12:10.157194472Z     '  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157196672Z     '\n' +
+2025-12-18T13:12:10.157198812Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157200892Z     '  --destructive-border: hsl(var(--destructive));\n' +
+2025-12-18T13:12:10.157203002Z     '  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157208772Z     '}\n' +
+2025-12-18T13:12:10.157210962Z     '\n' +
+2025-12-18T13:12:10.157213082Z     '.dark {\n' +
+2025-12-18T13:12:10.157215192Z     '  --button-outline: rgba(255,255,255, .10);\n' +
+2025-12-18T13:12:10.157217342Z     '  --badge-outline: rgba(255,255,255, .05);\n' +
+2025-12-18T13:12:10.157219582Z     '  --opaque-button-border-intensity: 9;\n' +
+2025-12-18T13:12:10.157221712Z     '  --elevate-1: rgba(255,255,255, .04);\n' +
+2025-12-18T13:12:10.157223802Z     '  --elevate-2: rgba(255,255,255, .09);\n' +
+2025-12-18T13:12:10.157225952Z     '  --background: 215 18% 8%;\n' +
+2025-12-18T13:12:10.157228042Z     '  --foreground: 210 15% 92%;\n' +
+2025-12-18T13:12:10.157230223Z     '  --border: 215 14% 18%;\n' +
+2025-12-18T13:12:10.157267093Z     '  --card: 215 16% 10%;\n' +
+2025-12-18T13:12:10.157270663Z     '  --card-foreground: 210 15% 92%;\n' +
+2025-12-18T13:12:10.157273893Z     '  --card-border: 215 14% 14%;\n' +
+2025-12-18T13:12:10.157277053Z     '  --sidebar: 215 16% 12%;\n' +
+2025-12-18T13:12:10.157280004Z     '  --sidebar-foreground: 210 15% 90%;\n' +
+2025-12-18T13:12:10.157282904Z     '  --sidebar-border: 215 14% 16%;\n' +
+2025-12-18T13:12:10.157285764Z     '  --sidebar-primary: 173 80% 35%;\n' +
+2025-12-18T13:12:10.157288954Z     '  --sidebar-primary-foreground: 0 0% 100%;\n' +
+2025-12-18T13:12:10.157292314Z     '  --sidebar-accent: 215 14% 18%;\n' +
+2025-12-18T13:12:10.157296064Z     '  --sidebar-accent-foreground: 210 15% 88%;\n' +
+2025-12-18T13:12:10.157300894Z     '  --sidebar-ring: 173 80% 35%;\n' +
+2025-12-18T13:12:10.157304354Z     '  --popover: 215 16% 16%;\n' +
+2025-12-18T13:12:10.157307604Z     '  --popover-foreground: 210 14% 88%;\n' +
+2025-12-18T13:12:10.157310564Z     '  --popover-border: 215 14% 20%;\n' +
+2025-12-18T13:12:10.157313704Z     '  --primary: 173 80% 35%;\n' +
+2025-12-18T13:12:10.157316564Z     '  --primary-foreground: 173 20% 95%;\n' +
+2025-12-18T13:12:10.157319424Z     '  --secondary: 215 12% 22%;\n' +
+2025-12-18T13:12:10.157322445Z     '  --secondary-foreground: 210 14% 86%;\n' +
+2025-12-18T13:12:10.157325965Z     '  --muted: 215 10% 20%;\n' +
+2025-12-18T13:12:10.157329114Z     '  --muted-foreground: 210 12% 68%;\n' +
+2025-12-18T13:12:10.157332205Z     '  --accent: 215 12% 18%;\n' +
+2025-12-18T13:12:10.157335195Z     '  --accent-foreground: 210 14% 85%;\n' +
+2025-12-18T13:12:10.157338285Z     '  --destructive: 0 72% 42%;\n' +
+2025-12-18T13:12:10.157341535Z     '  --destructive-foreground: 0 20% 96%;\n' +
+2025-12-18T13:12:10.157345345Z     '  --input: 215 18% 35%;\n' +
+2025-12-18T13:12:10.157348335Z     '  --ring: 173 80% 35%;\n' +
+2025-12-18T13:12:10.157350475Z     '  --chart-1: 173 75% 60%;\n' +
+2025-12-18T13:12:10.157352595Z     '  --chart-2: 262 60% 68%;\n' +
+2025-12-18T13:12:10.157354645Z     '  --chart-3: 280 65% 65%;\n' +
+2025-12-18T13:12:10.157356685Z     '  --chart-4: 195 70% 62%;\n' +
+2025-12-18T13:12:10.157358735Z     '  --chart-5: 340 60% 65%;\n' +
+2025-12-18T13:12:10.157360915Z     '  --shadow-2xs: 0px 2px 0px 0px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T13:12:10.157363295Z     '  --shadow-xs: 0px 2px 0px 0px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T13:12:10.157365415Z     '  --shadow-sm: 0px 2px 0px 0px hsl(215 15% 5% / 0.00), 0px 1px 2px -1px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T13:12:10.157367515Z     '  --shadow: 0px 2px 0px 0px hsl(215 15% 5% / 0.00), 0px 1px 2px -1px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T13:12:10.157369635Z     '  --shadow-md: 0px 2px 0px 0px hsl(215 15% 5% / 0.00), 0px 2px 4px -1px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T13:12:10.157378486Z     '  --shadow-lg: 0px 2px 0px 0px hsl(215 15% 5% / 0.00), 0px 4px 6px -1px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T13:12:10.157380776Z     '  --shadow-xl: 0px 2px 0px 0px hsl(215 15% 5% / 0.00), 0px 8px 10px -1px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T13:12:10.157382946Z     '  --shadow-2xl: 0px 2px 0px 0px hsl(215 15% 5% / 0.00);\n' +
+2025-12-18T13:12:10.157385046Z     '  --highlight: 262 60% 68%;\n' +
+2025-12-18T13:12:10.157396556Z     '  --highlight-foreground: 0 0% 100%;\n' +
+2025-12-18T13:12:10.157398976Z     '\n' +
+2025-12-18T13:12:10.157401066Z     '/* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157403196Z     '  --sidebar-primary-border: hsl(var(--sidebar-primary));\n' +
+2025-12-18T13:12:10.157405476Z     '  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157407686Z     '\n' +
+2025-12-18T13:12:10.157409776Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157412086Z     '  --sidebar-accent-border: hsl(var(--sidebar-accent));\n' +
+2025-12-18T13:12:10.157414276Z     '  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157416407Z     '\n' +
+2025-12-18T13:12:10.157418576Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157420687Z     '  --primary-border: hsl(var(--primary));\n' +
+2025-12-18T13:12:10.157423107Z     '  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157425177Z     '\n' +
+2025-12-18T13:12:10.157427287Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157429417Z     '  --secondary-border: hsl(var(--secondary));\n' +
+2025-12-18T13:12:10.157431607Z     '  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157433697Z     '\n' +
+2025-12-18T13:12:10.157435727Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157437787Z     '  --muted-border: hsl(var(--muted));\n' +
+2025-12-18T13:12:10.157439877Z     '  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157441977Z     '\n' +
+2025-12-18T13:12:10.157444227Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157446307Z     '  --accent-border: hsl(var(--accent));\n' +
+2025-12-18T13:12:10.157448567Z     '  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157450797Z     '\n' +
+2025-12-18T13:12:10.157452907Z     '  /* Fallback for older browsers */\n' +
+2025-12-18T13:12:10.157454957Z     '  --destructive-border: hsl(var(--destructive));\n' +
+2025-12-18T13:12:10.157457127Z     '  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);\n' +
+2025-12-18T13:12:10.157459237Z     '}\n' +
+2025-12-18T13:12:10.157461317Z     '\n' +
+2025-12-18T13:12:10.157463408Z     '@layer base {\n' +
+2025-12-18T13:12:10.157465508Z     '  * {\n' +
+2025-12-18T13:12:10.157467588Z     '    @apply border-border;\n' +
+2025-12-18T13:12:10.157469668Z     '  }\n' +
+2025-12-18T13:12:10.157471768Z     '\n' +
+2025-12-18T13:12:10.157473818Z     '  body {\n' +
+2025-12-18T13:12:10.157476008Z     '    @apply font-sans antialiased bg-background text-foreground;\n' +
+2025-12-18T13:12:10.157478108Z     '  }\n' +
+2025-12-18T13:12:10.157481088Z     '}\n' +
+2025-12-18T13:12:10.157484698Z     '\n' +
+2025-12-18T13:12:10.157493078Z     '/**\n' +
+2025-12-18T13:12:10.157496338Z     ' * Using the elevate system.\n' +
+2025-12-18T13:12:10.157499598Z     ' * Automatic contrast adjustment.\n' +
+2025-12-18T13:12:10.157502598Z     ' *\n' +
+2025-12-18T13:12:10.157505688Z     ' * <element className="hover-elevate" />\n' +
+2025-12-18T13:12:10.157508598Z     ' * <element className="active-elevate-2" />\n' +
+2025-12-18T13:12:10.157511669Z     ' *\n' +
+2025-12-18T13:12:10.157515299Z     ' * // Using the tailwind utility when a data attribute is "on"\n' +
+2025-12-18T13:12:10.157518909Z     ' * <element className="toggle-elevate data-[state=on]:toggle-elevated" />\n' +
+2025-12-18T13:12:10.157521089Z     ' * // Or manually controlling the toggle state\n' +
+2025-12-18T13:12:10.157523259Z     ' * <element className="toggle-elevate toggle-elevated" />\n' +
+2025-12-18T13:12:10.157525369Z     ' *\n' +
+2025-12-18T13:12:10.157527519Z     ' * Elevation systems have to handle many states.\n' +
+2025-12-18T13:12:10.157529659Z     ' * - not-hovered, vs. hovered vs. active  (three mutually exclusive states)\n' +
+2025-12-18T13:12:10.157531799Z     ' * - toggled or not\n' +
+2025-12-18T13:12:10.157533999Z     ' * - focused or not (this is not handled with these utilities)\n' +
+2025-12-18T13:12:10.157536079Z     ' *\n' +
+2025-12-18T13:12:10.157538179Z     ' * Even without handling focused or not, this is six possible combinations that\n' +
+2025-12-18T13:12:10.157540329Z     ' * need to be distinguished from eachother visually.\n' +
+2025-12-18T13:12:10.157542439Z     ' */\n' +
+2025-12-18T13:12:10.157544529Z     '@layer utilities {\n' +
+2025-12-18T13:12:10.157546679Z     '\n' +
+2025-12-18T13:12:10.157548789Z     '  /* Hide ugly search cancel button in Chrome until we can style it properly */\n' +
+2025-12-18T13:12:10.157551009Z     '  input[type="search"]::-webkit-search-cancel-button {\n' +
+2025-12-18T13:12:10.15755311Z     '    @apply hidden;\n' +
+2025-12-18T13:12:10.15755523Z     '  }\n' +
+2025-12-18T13:12:10.15755743Z     '\n' +
+2025-12-18T13:12:10.15755959Z     '  /* Placeholder styling for contentEditable div */\n' +
+2025-12-18T13:12:10.15756171Z     '  [contenteditable][data-placeholder]:empty::before {\n' +
+2025-12-18T13:12:10.15756385Z     '    content: attr(data-placeholder);\n' +
+2025-12-18T13:12:10.15756603Z     '    color: hsl(var(--muted-foreground));\n' +
+2025-12-18T13:12:10.15756817Z     '    pointer-events: none;\n' +
+2025-12-18T13:12:10.15757024Z     '  }\n' +
+2025-12-18T13:12:10.15757232Z     '\n' +
+2025-12-18T13:12:10.1575744Z     '  /* .no-default-hover-elevate/no-default-active-elevate is an escape hatch so consumers of\n' +
+2025-12-18T13:12:10.15757651Z     '   * buttons/badges can remove the automatic brightness adjustment on interactions\n' +
+2025-12-18T13:12:10.15757859Z     '   * and program their own. */\n' +
+2025-12-18T13:12:10.15758069Z     '  .no-default-hover-elevate {}\n' +
+2025-12-18T13:12:10.15758277Z     '\n' +
+2025-12-18T13:12:10.15758489Z     '  .no-default-active-elevate {}\n' +
+2025-12-18T13:12:10.15758699Z     '\n' +
+2025-12-18T13:12:10.15758908Z     '\n' +
+2025-12-18T13:12:10.15759115Z     '  /**\n' +
+2025-12-18T13:12:10.15759325Z     '   * Toggleable backgrounds go behind the content. Hoverable/active goes on top.\n' +
+2025-12-18T13:12:10.15759535Z     "   * This way they can stack/compound. Both will overlap the parent's borders!\n" +
+2025-12-18T13:12:10.157606211Z     '   * So borders will be automatically adjusted both on toggle, and hover/active,\n' +
+2025-12-18T13:12:10.157608631Z     '   * and they will be compounded.\n' +
+2025-12-18T13:12:10.157610751Z     '   */\n' +
+2025-12-18T13:12:10.157616971Z     '  .toggle-elevate::before,\n' +
+2025-12-18T13:12:10.157619221Z     '  .toggle-elevate-2::before {\n' +
+2025-12-18T13:12:10.157621361Z     '    content: "";\n' +
+2025-12-18T13:12:10.157623441Z     '    pointer-events: none;\n' +
+2025-12-18T13:12:10.157625621Z     '    position: absolute;\n' +
+2025-12-18T13:12:10.157627711Z     '    inset: 0px;\n' +
+2025-12-18T13:12:10.157629851Z     '    /*border-radius: inherit;   match rounded corners */\n' +
+2025-12-18T13:12:10.157632031Z     '    border-radius: inherit;\n' +
+2025-12-18T13:12:10.157634171Z     '    z-index: -1;\n' +
+2025-12-18T13:12:10.157636311Z     '    /* sits behind content but above backdrop */\n' +
+2025-12-18T13:12:10.157638391Z     '  }\n' +
+2025-12-18T13:12:10.157640481Z     '\n' +
+2025-12-18T13:12:10.157642611Z     '  .toggle-elevate.toggle-elevated::before {\n' +
+2025-12-18T13:12:10.157644741Z     '    background-color: var(--elevate-2);\n' +
+2025-12-18T13:12:10.157646852Z     '  }\n' +
+2025-12-18T13:12:10.157648921Z     '\n' +
+2025-12-18T13:12:10.157651072Z     "  /* If there's a 1px border, adjust the inset so that it covers that parent's border */\n" +
+2025-12-18T13:12:10.157653141Z     '  .border.toggle-elevate::before {\n' +
+2025-12-18T13:12:10.157655322Z     '    inset: -1px;\n' +
+2025-12-18T13:12:10.157657412Z     '  }\n' +
+2025-12-18T13:12:10.157659462Z     '\n' +
+2025-12-18T13:12:10.157661622Z     '  /* Does not work on elements with overflow:hidden! */\n' +
+2025-12-18T13:12:10.157663762Z     '  .hover-elevate:not(.no-default-hover-elevate),\n' +
+2025-12-18T13:12:10.157665862Z     '  .active-elevate:not(.no-default-active-elevate),\n' +
+2025-12-18T13:12:10.157667932Z     '  .hover-elevate-2:not(.no-default-hover-elevate),\n' +
+2025-12-18T13:12:10.157669992Z     '  .active-elevate-2:not(.no-default-active-elevate) {\n' +
+2025-12-18T13:12:10.157672072Z     '    position: relative;\n' +
+2025-12-18T13:12:10.157674142Z     '    z-index: 0;\n' +
+2025-12-18T13:12:10.157676252Z     '  }\n' +
+2025-12-18T13:12:10.157678302Z     '\n' +
+2025-12-18T13:12:10.157680512Z     '  .hover-elevate:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:12:10.157682612Z     '  .active-elevate:not(.no-default-active-elevate)::after,\n' +
+2025-12-18T13:12:10.157684692Z     '  .hover-elevate-2:not(.no-default-hover-elevate)::after,\n' +
+2025-12-18T13:12:10.157686772Z     '  .active-elevate-2:not(.no-default-active-elevate)::after {\n' +
+2025-12-18T13:12:10.157688862Z     '    content: "";\n' +
+2025-12-18T13:12:10.157690942Z     '    pointer-events: none;\n' +
+2025-12-18T13:12:10.157693042Z     '    position: absolute;\n' +
+2025-12-18T13:12:10.157695142Z     '    inset: 0px;\n' +
+2025-12-18T13:12:10.157697262Z     '    /*border-radius: inherit;   match'... 912 more characters,
+2025-12-18T13:12:10.157699433Z   plugin: 'vite:css',
+2025-12-18T13:12:10.157701513Z   hook: 'transform',
+2025-12-18T13:12:10.157703593Z   id: '/opt/render/project/src/client/src/index.css',
+2025-12-18T13:12:10.157705643Z   watchFiles: [
+2025-12-18T13:12:10.157707743Z     '/opt/render/project/src/client/index.html',
+2025-12-18T13:12:10.157709823Z     '/opt/render/project/src/client/src/main.tsx',
+2025-12-18T13:12:10.157711883Z     '/opt/render/project/src/package.json',
+2025-12-18T13:12:10.157714013Z     '/opt/render/project/src/node_modules/react/jsx-runtime.js',
+2025-12-18T13:12:10.157716093Z     '/opt/render/project/src/node_modules/react-dom/client.js',
+2025-12-18T13:12:10.157718183Z     '/opt/render/project/src/client/src/App.tsx',
+2025-12-18T13:12:10.157720343Z     '/opt/render/project/src/client/src/index.css'
+2025-12-18T13:12:10.157725613Z   ]
+2025-12-18T13:12:10.157727933Z }
+2025-12-18T13:12:10.25089605Z ==> Build failed 😞
+2025-12-18T13:12:10.250915341Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
