@@ -5,18 +5,15 @@
 Proyek **Janjiin** adalah aplikasi web fullstack yang menggabungkan:
 - **Backend**: Express.js dengan TypeScript
 - **Frontend**: React dengan Vite bundler
-- **Database**: PostgreSQL (siap untuk production)
+- **Database**: PostgreSQL (siap untuk production via Supabase)
+- **Deployment**: Render.com (free tier)
 - **Real-time**: WebSocket support
 
-## Migration Status
+## Deployment Status
 
-✅ **Migration Completed** - Proyek berhasil dimigrasikan dari Replit Agent ke Replit Environment
-
-### Changes Made:
-- Fixed critical directory typo: `client/scr` → `client/src` (Vite build issue)
-- All Node.js packages installed successfully
-- Application running on port 5000 (Express + Vite dev server)
-- WebSocket initialized for real-time features
+✅ **Deployed to Render.com** - Free tier, no credit card required
+- Frontend + Backend: https://janjiin.onrender.com
+- Database: Supabase PostgreSQL (free tier)
 
 ## Project Structure
 
@@ -25,13 +22,14 @@ Proyek **Janjiin** adalah aplikasi web fullstack yang menggabungkan:
 ├── server/
 │   ├── index.ts              # Express server entry point
 │   ├── routes.ts             # API routes
-│   ├── storage.ts            # Storage interface (in-memory by default)
+│   ├── storage.ts            # Storage interface
 │   └── vite.ts               # Vite server middleware
 ├── client/
 │   ├── src/
 │   │   ├── main.tsx          # React entry point
 │   │   ├── App.tsx           # Main app component with routing
-│   │   ├── components/       # React components
+│   │   ├── index.css         # Global styles + Tailwind directives
+│   │   ├── components/       # React components (shadcn UI)
 │   │   ├── pages/            # Page components
 │   │   ├── lib/              # Utility functions
 │   │   └── hooks/            # Custom React hooks
@@ -39,7 +37,11 @@ Proyek **Janjiin** adalah aplikasi web fullstack yang menggabungkan:
 │   └── vite-env.d.ts
 ├── shared/
 │   └── schema.ts             # Data models & Zod schemas
+├── script/
+│   └── build.ts              # Custom build script
 ├── vite.config.ts            # Vite configuration
+├── tailwind.config.ts        # Tailwind CSS config
+├── postcss.config.mjs        # PostCSS config (ES modules)
 ├── tsconfig.json             # TypeScript config
 ├── package.json              # Dependencies
 └── drizzle.config.ts         # Drizzle ORM config
@@ -47,116 +49,233 @@ Proyek **Janjiin** adalah aplikasi web fullstack yang menggabungkan:
 
 ## Running the Application
 
-The application is already configured in Replit and runs automatically:
-
+### Local Development
 ```bash
 npm run dev
 ```
+Starts Express + Vite dev server on `0.0.0.0:5000`
 
-This starts:
-- Express server on `0.0.0.0:5000`
-- Vite dev server on the same port (with HMR support)
-- WebSocket server for real-time features
-
-## Environment Setup
-
-### Required Secrets (for production):
-- `GITHUB_TOKEN` - For GitHub integration (already configured)
-
-### Environment Variables:
-None required for development. The app uses sensible defaults.
-
-## GitHub Synchronization
-
-### Method: Built-in Replit Git Integration
-
-To sync this project with GitHub repository `https://github.com/totaleroom/janjiin`:
-
-1. **Open Git Pane in Replit**
-   - Look for the "Source Control" or "Git" icon in the left sidebar
-   - Or use: Menu → Version Control
-
-2. **Initialize Git (if not already done)**
-   - Click "Initialize Repository" or "Connect to GitHub"
-
-3. **Connect to GitHub**
-   - Select "Connect with GitHub"
-   - Authorize Replit to access your GitHub account
-   - Select the repository: `totaleroom/janjiin`
-
-4. **Commit & Push Changes**
-   - Git pane will show all modified files
-   - Stage files or click "Stage All"
-   - Enter commit message: "Migration: Fix directory structure and setup Replit environment"
-   - Click "Commit"
-   - Click "Push" to push to your GitHub repository
-
-### Alternative: Command Line (if preferred)
+### Production Build
 ```bash
-git remote add origin https://github.com/totaleroom/janjiin.git
-git add .
-git commit -m "Migration: Fix directory structure and setup Replit environment"
-git push -u origin main
+npm run build
+npm run start
 ```
-
-**Note**: If using command line, you may need to authenticate using your GitHub personal access token.
 
 ## Tech Stack
 
 - **Runtime**: Node.js 20+
 - **Framework**: Express.js 4.x
 - **Frontend Framework**: React 18
-- **Build Tool**: Vite
+- **Build Tool**: Vite 5.x
 - **Language**: TypeScript
-- **ORM**: Drizzle ORM (PostgreSQL ready)
+- **Styling**: Tailwind CSS 3.x
+- **UI Components**: shadcn/ui (Radix UI)
+- **ORM**: Drizzle ORM
+- **Data Validation**: Zod + React Hook Form
 - **HTTP Client**: TanStack React Query v5
-- **UI Components**: shadcn/ui (Radix UI based)
-- **Styling**: Tailwind CSS
-- **Form Validation**: React Hook Form + Zod
-- **Routing**: Wouter (client-side)
+- **Routing**: Wouter
+
+---
+
+# 🎓 DEPLOYMENT & BUILD TROUBLESHOOTING GUIDE
+
+## Problem Journey: Render Deployment CSS Build Failure
+
+### ⚠️ Issue Summary
+Deploying to **Render.com** revealed CSS styling issues (Tailwind not generating full styles).
+
+### 🔍 Debugging Methodology
+
+#### **Stage 1: Identify Local vs Remote Difference**
+```
+✓ Build SUCCESS locally (77.47 kB CSS)
+✗ Build FAILED on Render (6.16 kB CSS)
+```
+**Lesson**: Environment differences are the root cause 90% of the time.
+
+**Immediate checks**:
+1. Compare local build artifact size vs Render logs
+2. Check environment variables (Node version, build tools)
+3. Review Render logs for specific error messages
+4. Try exact Render build command locally: `npm run build`
+
+#### **Stage 2: Binary Search Approach**
+Test configuration systematically from simplest to complex:
+
+1. **No PostCSS config** → Build succeeds but CSS understyled (6 kB)
+2. **PostCSS ES module (.js)** → Render fails (ESM not supported)
+3. **PostCSS CommonJS (.cjs)** → Render still fails (path issues)
+4. **PostCSS with context function** → Render still fails
+5. **PostCSS ES module (.mjs)** → ✅ WORKS!
+
+**Key insight**: Render's Node.js has different ESM resolution than local dev.
+
+#### **Stage 3: Root Cause Analysis**
+
+| Issue | Cause | Why It Failed | Solution |
+|-------|-------|---------------|----------|
+| CSS only 6 kB | Tailwind not processing CSS | No PostCSS config | Add config |
+| `postcss.config.js` fails | ESM not resolved by Render build | Environment mismatch | Use `.mjs` or `.cjs` |
+| `postcss.config.cjs` fails | CJS resolver issue in Render | Build tool strictness | Use `.mjs` instead |
+| `postcss.config.mjs` works | Explicit ES module extension | Render recognizes format | Use `.mjs` |
+
+### ✅ Final Solution: `postcss.config.mjs`
+
+```javascript
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
+
+**Why this works**:
+- `.mjs` = explicit ES module (no ambiguity for build tools)
+- Render's esbuild recognizes `.mjs` without config
+- Compatible with both local Vite and Render CI/CD
+
+### 📋 Checklist for Future Render Deployments
+
+#### Before Pushing to Production:
+- [ ] **CSS file**: Verify production build CSS is 50+ kB (not understyled 6 kB)
+- [ ] **PostCSS config**: Use `.mjs` extension (not `.js` or `.cjs`)
+- [ ] **Tailwind paths**: Ensure `content` paths match project structure
+- [ ] **Environment variables**: All required secrets in Render dashboard
+- [ ] **Build command**: Runs successfully locally first
+
+#### During Render Deploy:
+- [ ] Check **Build logs** for PostCSS errors
+- [ ] If CSS understyled: Check CSS file size in Render logs
+- [ ] If PostCSS error: Try `.mjs` file extension
+- [ ] Manual rebuild if cache stale: Dashboard → Manual Deploy
+
+#### Common Render Build Issues & Solutions:
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `failed to load PostCSS config` | ESM/CJS mismatch | Use `.mjs` |
+| CSS only 6 kB | Tailwind not running | Verify `postcss.config.mjs` exists |
+| `Cannot find module` | Missing build dependencies | Check package.json dependencies (not devDependencies) |
+| Stale CSS after push | Render caching | Manual deploy via dashboard |
+| `port 10000 already in use` | Multiple processes | Check Render concurrency setting |
+
+### 🧠 LLM Troubleshooting Strategy
+
+#### **Think Like This for Similar Issues:**
+
+1. **First**: Ask "Local vs Remote?" - Is it working locally?
+   - If YES: Environment configuration issue
+   - If NO: Code/dependency issue
+
+2. **Second**: Reproduce locally with production config
+   - Run `npm run build` (production build)
+   - Check artifact sizes match expectations
+   - Test build output on local Node.js
+
+3. **Third**: Check file extensions & formats
+   - `.js` = ambiguous (could be ESM or CJS)
+   - `.cjs` = CommonJS explicit
+   - `.mjs` = ES Module explicit ← Preferred for build tools
+
+4. **Fourth**: Validate configuration recursively
+   - Does tool A find tool B's config?
+   - Does tool B find tool C's config?
+   - Trace the dependency chain
+
+5. **Fifth**: Check environment differences
+   - Node version (use `.nvmrc` or `engines` in package.json)
+   - Available tools/packages
+   - File system case sensitivity (Windows vs Linux)
+
+#### **Red Flags for Build Issues:**
+```
+🚩 "Works locally but fails on CI/CD"
+   → Environment variable or build tool version
+
+🚩 "CSS understyled or missing"
+   → PostCSS/Tailwind not running in build
+
+🚩 "Module not found errors"
+   → ESM/CJS resolution issue (use .mjs)
+
+🚩 "Stale output on deploy"
+   → Cache issue (manual rebuild or touch files)
+```
+
+---
 
 ## Development Guidelines
 
-This project follows the `fullstack_js` development pattern from Replit:
-
 ### Backend:
-- Use storage interface in `server/storage.ts` for all CRUD operations
-- Keep routes in `server/routes.ts` as thin as possible
-- Always validate request bodies using Zod schemas
+- Use storage interface for all CRUD operations
+- Keep routes thin, validation in schema
+- Always validate with Zod before DB operations
 
 ### Frontend:
-- Use Wouter for client-side routing
-- Use TanStack React Query for data fetching
-- Always use shadcn components from `client/src/components/ui`
-- Add `data-testid` attributes to all interactive elements
+- Use Wouter for routing
+- Use TanStack Query for data fetching
+- Use shadcn/ui components from `client/src/components/ui`
+- Add `data-testid` to interactive elements
 
 ### Styling:
-- Use Tailwind CSS utility classes
-- Use `hover-elevate` and `active-elevate-2` for interactions
-- Follow dark mode guidelines with explicit light/dark variants
-- Never use emoji in UI - use lucide-react icons instead
+- Tailwind CSS utility classes only
+- Use `hover-elevate` / `active-elevate-2` for interactions
+- No manual hover states (built into shadcn components)
+- Dark mode: explicit light/dark variants
 
-## Known Issues
+---
 
-### PostCSS Warning
-A non-blocking PostCSS warning appears during startup about missing `from` option. This doesn't affect functionality but can be resolved by updating the PostCSS configuration if needed.
+## Deployment Checklist
 
-### Browser Console WebSocket Errors
-During development, you may see WebSocket connection errors in the browser console. This is expected in the Replit development environment and doesn't affect the application functionality.
+### Pre-Deploy:
+- [ ] `npm run build` succeeds locally
+- [ ] CSS file is 70+ kB (gzipped 12+ kB)
+- [ ] All environment variables in Render dashboard
+- [ ] GitHub repo synced with latest code
+- [ ] `package.json` has build tools in dependencies (not devDependencies)
+
+### Post-Deploy:
+- [ ] Visit https://janjiin.onrender.com and check styling
+- [ ] Test responsive layout (mobile/tablet/desktop)
+- [ ] Check browser console for JS errors
+- [ ] Test all interactive elements
+
+---
+
+## Known Issues & Resolutions
+
+### PostCSS Build Issues (RESOLVED)
+**Problem**: CSS understyled on Render, full on local
+**Root Cause**: PostCSS config extension ambiguity
+**Solution**: Use `.mjs` extension for config file
+**Status**: ✅ FIXED - Use `postcss.config.mjs`
+
+### WebSocket Connection Errors (Expected)
+During local development, browser console shows WebSocket errors. This is expected in Replit environment and doesn't affect production.
+
+---
 
 ## Next Steps
 
-1. **Sync with GitHub** using the Git pane (see above)
-2. **Start Development** - Modify code and changes will auto-reload
-3. **Add Database** - When ready for persistence, uncomment PostgreSQL setup
-4. **Deploy** - Use Replit's publish feature for production deployment
+1. **Monitor Render deployment**: Check logs for any runtime errors
+2. **Test all pages**: Verify each route works (landing, login, register, dashboard)
+3. **Database**: Connect production Supabase instance when ready
+4. **Continuous Deployment**: Enable auto-deploy on GitHub push
 
-## Support
+---
 
-For questions about the Replit environment, visit: https://replit.com/docs
+## Resources
+
+- **Render Docs**: https://render.com/docs
+- **Tailwind CSS**: https://tailwindcss.com/docs
+- **Vite**: https://vitejs.dev/guide
+- **Drizzle ORM**: https://orm.drizzle.team
+
+---
 
 ## Last Updated
 
 - **Date**: December 18, 2025
-- **Migration**: From Replit Agent to Replit Environment
-- **Status**: ✅ Complete and Ready for Development
+- **Status**: ✅ Deployed to Render.com (Free tier)
+- **Next Milestone**: Connect production database & test live features
