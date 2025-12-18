@@ -1,0 +1,50 @@
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+==> Build failed 😞
+}
+  ]
+    '/opt/render/project/src/client/src/index.css'
+    '/opt/render/project/src/client/src/App.tsx',
+    '/opt/render/project/src/node_modules/react-dom/client.js',
+    '/opt/render/project/src/node_modules/react/jsx-runtime.js',
+    '/opt/render/project/src/package.json',
+    '/opt/render/project/src/client/src/main.tsx',
+    '/opt/render/project/src/client/index.html',
+  watchFiles: [
+  id: '/opt/render/project/src/client/src/index.css',
+  hook: 'transform',
+  plugin: 'vite:css',
+    '}\n',
+    '  }\n' +
+    '    inset: -1px;\n' +
+    '  .border.hover-elevate:not(.no-hover-interaction-elevate)::after {\n' +
+    '  .border.active-elevate-2:not(.no-active-interaction-elevate)::after,\n' +
+    '  .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,\n' +
+    '  .border.active-elevate:not(.no-active-interaction-elevate)::after,\n' +
+    '  .border.hover-elevate:not(.no-hover-interaction-elevate)::after,\n' +
+    "  /* If there's a 1px border, adjust the inset so that it covers that parent's border */\n" +
+    '\n' +
+    '  }\n' +
+    '    background-color: var(--elevate-2);\n' +
+    '  .active-elevate-2:active:not(.no-default-active-elevate)::after {\n' +
+    '  .hover-elevate-2:hover:not(.no-default-hover-elevate)::after,\n' +
+    '\n' +
+    '  }\n' +
+    '    background-color: var(--elevate-1);\n' +
+    '  .active-elevate:active:not(.no-default-active-elevate)::after {\n' +
+    '  .hover-elevate:hover:not(.no-default-hover-elevate)::after,\n' +
+    '\n' +
+    '  }\n' +
+    '    /* sits in front of content */\n' +
+    '    z-index: 999;\n' +
+    '    border-radius: inherit;\n' +
+    '    /*border-radius: inherit;   match rounded corners */\n' +
+    '    inset: 0px;\n' +
+    '    position: absolute;\n' +
+    '    pointer-events: none;\n' +
+    '    content: "";\n' +
+    '  .active-elevate-2:not(.no-default-active-elevate)::after {\n' +
+    '  .hover-elevate-2:not(.no-default-hover-elevate)::after,\n' +
+    '  .active-elevate:not(.no-default-active-elevate)::after,\n' +
+    '  .hover-elevate:not(.no-default-hover-elevate)::after,\n' +
+    '\n' +
+    '  }\n' +
