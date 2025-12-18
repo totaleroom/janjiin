@@ -1,0 +1,33 @@
+==> Cloning from https://github.com/totaleroom/janjiin
+==> Checking out commit 4e153524c9185e94bfede3973a1b045758bac0ba in branch main
+==> Using Node.js version 22.16.0 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'npm install; npm run build'...
+added 470 packages, and audited 471 packages in 9s
+65 packages are looking for funding
+  run `npm fund` for details
+9 vulnerabilities (3 low, 5 moderate, 1 high)
+To address issues that do not require attention, run:
+  npm audit fix
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+Run `npm audit` for details.
+> rest-express@1.0.0 build
+> tsx script/build.ts
+building client...
+failed to load config from /opt/render/project/src/vite.config.ts
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@replit/vite-plugin-runtime-error-modal' imported from /opt/render/project/src/vite.config.ts.timestamp-1766061763594-b6c791d25d22f.mjs
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:256:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:854:18)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at resolveBase (file:///opt/render/project/src/node_modules/tsx/dist/esm/index.mjs?1766061762807:2:3744)
+    at resolveDirectory (file:///opt/render/project/src/node_modules/tsx/dist/esm/index.mjs?1766061762807:2:4243)
+    at resolveTsPaths (file:///opt/render/project/src/node_modules/tsx/dist/esm/index.mjs?1766061762807:2:4984)
+    at async resolve (file:///opt/render/project/src/node_modules/tsx/dist/esm/index.mjs?1766061762807:2:5355)
+    at async nextResolve (node:internal/modules/esm/hooks:748:22) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+==> Build failed 😞
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
